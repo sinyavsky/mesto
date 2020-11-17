@@ -1,0 +1,37 @@
+.profile__edit {
+  position: absolute;
+  right: -29px;
+  top: calc(50% - 9px);
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid #fff;
+  background: none;
+}
+
+.profile__edit::before {
+  content: '';
+  background: url(../../../images/profile__edit.svg) no-repeat center center;
+  background-size: 8px 8px;
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+@media screen and (min-width: 768px)
+{
+  .profile__edit {
+    width: 24px;
+    height: 24px;
+    right: -45px;
+  }
+  
+  .profile__edit::before {
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+  }
+}

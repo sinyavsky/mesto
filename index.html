@@ -5,15 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Приложение Mesto</title>
   <link href="pages/index.css" rel="stylesheet">
-
 </head>
 <body class="page">
   <header class="header">
-    <a href="#" class="header__logo"><img src="images/logo.svg" alt="Место"></a>
+    <a href="#"><img src="images/logo.svg" alt="Место" class="header__logo"></a>
   </header>
-  <div class="page__container">
-    
-  </div>
+  <main class="page__container">
+    <section class="profile">
+      <figure class="profile__user">
+        <img src="images/avatar.jpg" alt="Жак-Ив Кусто - фото профиля" class="profile__ava">
+        <figcaption class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто<button class="profile__edit"></button></h1>
+          <p class="profile__bio">Исследователь океана</p>          
+        </figcaption>
+      </figure>    
+      <button class="profile__add"></button>  
+    </section>
+  </main>
   <script src="js/script.js"></script>
 </body>
 </html>
