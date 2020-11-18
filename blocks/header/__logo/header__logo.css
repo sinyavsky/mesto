@@ -2,7 +2,7 @@
   display: block;
   width: 104px;
   height: 25px;
-  transition: all ease .5s
+  transition: all ease .5s;
 }
 
 .header__logo:hover {
