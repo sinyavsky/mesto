@@ -15,7 +15,10 @@
       <figure class="profile__user">             
         <img src="images/avatar.jpg" alt="Жак-Ив Кусто - фото профиля" class="profile__ava">
         <figcaption class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто<button class="profile__edit"></button></h1>
+          <div class="profile__name-wrap">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit"></button>
+          </div>         
           <p class="profile__bio">Исследователь океана</p>          
         </figcaption>
       </figure>    
@@ -88,8 +91,8 @@
       <button class="popup__close"></button>
       <form action="post" method="" class="popup__form">
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <input type="text" class="popup__input" value="Жак-Ив Кусто">
-        <input type="text" class="popup__input" value="Исследователь океана">
+        <input type="text" class="popup__input popup__input_name" value="">
+        <input type="text" class="popup__input popup__input_bio" value="">
         <button type="submit" class="popup__submit">Сохранить</button>
       </form>
     </div>
