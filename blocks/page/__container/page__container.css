@@ -4,7 +4,7 @@
   margin: 42px auto 0;
 }
 
-@media screen and (min-width: 768px)
+@media screen and (min-width: 918px)
 {
   .page__container {
     margin-top: 40px;

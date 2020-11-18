@@ -5,7 +5,7 @@
   margin: 8px 0 0;
 }
 
-@media screen and (min-width: 768px)
+@media screen and (min-width: 918px)
 {
   .profile__bio {
     text-align: left;

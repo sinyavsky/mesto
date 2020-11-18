@@ -16,3 +16,11 @@
 @import url(../blocks/profile/__edit/profile__edit.css);
 @import url(../blocks/profile/__bio/profile__bio.css);
 @import url(../blocks/profile/__add/profile__add.css);
+
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__list/cards__list.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__picture/card__picture.css);
+@import url(../blocks/card/__description/card__description.css);
+@import url(../blocks/card/__name/card__name.css);
+@import url(../blocks/card/__like/card__like.css);
