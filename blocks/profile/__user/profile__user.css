@@ -4,6 +4,7 @@
   flex-flow: column;
   align-items: center;
   text-align: center;
+  max-width: calc(100% - 60px);
 }
 
 @media screen and (min-width: 918px)
@@ -11,5 +12,6 @@
   .profile__user {
     flex-flow: row;
     align-items: center;
+    max-width: calc(100% - 310px);
   }
 }

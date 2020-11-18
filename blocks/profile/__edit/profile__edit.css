@@ -11,6 +11,7 @@
   border: 1px solid #fff;
   background: none;
   cursor: pointer;
+  transition: opacity ease .5s;
 }
 
 .profile__edit::before {
@@ -22,12 +23,16 @@
   display: block;
 }
 
+.profile__edit:hover {
+  opacity: .6;
+}
+
 @media screen and (min-width: 918px)
 {
   .profile__edit {
     width: 24px;
     height: 24px;
-    right: -45px;
+    right: -42px;
   }
   
   .profile__edit::before {

@@ -27,7 +27,7 @@ function onPopupClose() {
 
 function onPopupFormSubmit(e) {
   e.preventDefault();
-
+  
   let nameValue = document.querySelector('.popup__input_name').value;
   let profileName = document.querySelector('.profile__name');
   profileName.textContent = nameValue;

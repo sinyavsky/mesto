@@ -7,6 +7,21 @@
   <link href="pages/index.css" rel="stylesheet">
 </head>
 <body class="page">
+  <!-- 
+    Привет! Несколько комментариев:
+
+    1. При сохранении полей в поп-апе их нужно валидировать: не сохранять пустые значения, возможно ограничивать макс. длину. 
+    Я этого не делал, т.к. в брифе об этом речи нет (возможно, это задача для следующих спринтов)
+
+    2. В макете нет примера реализации интерфейса с очень длинным именем пользователя. Поэтому сделал все максимально просто
+
+    3. В чеклисте указано: "Присутствуют и используются по назначению элементы header, main, footer, section, nav." - но мне
+    кажется nav здесь нигде не уместен, поэтому его я не использовал
+
+    4. В поп-апе заголовок сделал p, а не h2, т.к. в чеклисте в блоке о заголовках указано: На странице нет скрытых элементов
+
+    Жду обратную связь, заранее спасибо!    
+  -->
   <header class="header">
     <a href="#"><img src="images/logo.svg" alt="Место" class="header__logo"></a>
   </header>
@@ -17,7 +32,7 @@
         <figcaption class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit"></button>
+            <button class="profile__edit" title="Редактировать профиль"></button>
           </div>         
           <p class="profile__bio">Исследователь океана</p>          
         </figcaption>
@@ -28,54 +43,54 @@
       <ul class="cards__list">
         <li>
           <figure class="card">
-            <img src="images/karachaevsk.jpg" alt="Карачаевск" class="card__picture">
+            <img src="images/most-zolotye-vorota.jpg" alt="Мост Золотые Ворота" class="card__picture" title="Мост Золотые Ворота">
             <figcaption class="card__description">
-              <p class="card__name">Карачаево-Четот</p>
+              <p class="card__name" title="Мост Золотые Ворота">Мост Золотые Ворота</p>
               <button class="card__like"></button>
             </figcaption>
           </figure>
         </li>
         <li>
           <figure class="card">
-            <img src="images/gora-elbrus.jpg" alt="Гора Эльбрус" class="card__picture">
+            <img src="images/karpatos.jpg" alt="Карпатос" class="card__picture" title="Карпатос">
             <figcaption class="card__description">
-              <p class="card__name">Гора Эльбрус</p>
+              <p class="card__name" title="Карпатос">Карпатос</p>
               <button class="card__like"></button>
             </figcaption>
           </figure>
         </li>
         <li>
           <figure class="card">
-            <img src="images/dombay.jpg" alt="Домбай" class="card__picture">
+            <img src="images/berlinskiy-kafedralnyy-sobor.jpg" alt="Берлинский Кафедральный Собор" class="card__picture" title="Берлинский Кафедральный Собор">
             <figcaption class="card__description">
-              <p class="card__name">Домбай</p>
+              <p class="card__name" title="Берлинский Кафедральный Собор">Берлинский Кафедральный Собор</p>
+              <button class="card__like"></button>
+            </figcaption>
+          </figure>
+        </li>        
+        <li>
+          <figure class="card">
+            <img src="images/krasnaya-ploshad.jpg" alt="Красная Площадь" class="card__picture" title="Красная Площадь">
+            <figcaption class="card__description">
+              <p class="card__name" title="Красная Площадь">Красная Площадь</p>
               <button class="card__like"></button>
             </figcaption>
           </figure>
         </li>
         <li>
           <figure class="card">
-            <img src="images/gora-elbrus.jpg" alt="Гора Эльбрус" class="card__picture">
+            <img src="images/dzhaypur.jpg" alt="Джайпур" class="card__picture" title="Джайпур">
             <figcaption class="card__description">
-              <p class="card__name">Гора Эльбрус</p>
+              <p class="card__name" title="Джайпур">Джайпур</p>
               <button class="card__like"></button>
             </figcaption>
           </figure>
         </li>
         <li>
           <figure class="card">
-            <img src="images/dombay.jpg" alt="Домбай" class="card__picture">
+            <img src="images/eyfeleva-bashnya.jpg" alt="Эйфелева Башня" class="card__picture" title="Эйфелева Башня">
             <figcaption class="card__description">
-              <p class="card__name">Домбай</p>
-              <button class="card__like"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/karachaevsk.jpg" alt="Карачаевск" class="card__picture">
-            <figcaption class="card__description">
-              <p class="card__name">Карачаево-Четот</p>
+              <p class="card__name" title="Эйфелева Башня">Эйфелева Башня</p>
               <button class="card__like"></button>
             </figcaption>
           </figure>
@@ -88,11 +103,11 @@
   </footer>
   <div class="popup">
     <div class="popup__container">
-      <button class="popup__close"></button>
-      <form action="post" method="" class="popup__form">
-        <h2 class="popup__heading">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__input_name" value="">
-        <input type="text" class="popup__input popup__input_bio" value="">
+      <button class="popup__close" title="Закрыть"></button>
+      <form action="post" class="popup__form">        
+        <p class="popup__heading">Редактировать профиль</p>
+        <input type="text" class="popup__input popup__input_name" value="" placeholder="Имя">
+        <input type="text" class="popup__input popup__input_bio" value="" placeholder="О себе">
         <button type="submit" class="popup__submit">Сохранить</button>
       </form>
     </div>
