@@ -24,3 +24,5 @@
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__name/card__name.css);
 @import url(../blocks/card/__like/card__like.css);
+
+@import url(../blocks/footer/footer.css);
