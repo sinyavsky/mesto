@@ -10,6 +10,7 @@
   padding: 0;
   border: 1px solid #fff;
   background: none;
+  cursor: pointer;
 }
 
 .profile__edit::before {
