@@ -6,6 +6,7 @@
   width: calc(100% - 36px);
   margin: 0 auto;
   transition: all ease .5s;
+  flex-shrink: 0;
 }
 
 @media screen and (min-width: 918px)
