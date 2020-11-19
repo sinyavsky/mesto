@@ -1,7 +1,4 @@
 .profile__edit {
-  position: absolute;
-  right: -29px;
-  top: calc(50% - 9px);
   width: 18px;
   height: 18px;
   display: flex;
@@ -12,6 +9,9 @@
   background: none;
   cursor: pointer;
   transition: opacity ease .5s;
+  align-self: center;
+  margin-left: 10px;
+  flex-shrink: 0;
 }
 
 .profile__edit::before {
@@ -32,7 +32,8 @@
   .profile__edit {
     width: 24px;
     height: 24px;
-    right: -42px;
+    margin-left: 18px;
+    margin-top: 7px;
   }
   
   .profile__edit::before {
