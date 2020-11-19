@@ -3,7 +3,8 @@
   flex-flow: column;
   align-items: center;
   text-align: center;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 30px);
+  width: 100%;
 }
 
 @media screen and (min-width: 918px)
