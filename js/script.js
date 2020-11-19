@@ -5,10 +5,10 @@ let popupForm = document.querySelector('.popup__form');
 
 // для обращения внутри функций
 let nameElement = document.querySelector('.profile__name');
-let nameInput = document.querySelector('.popup__input_name');
+let nameInput = document.querySelector('.popup__input_type_name');
 
 let bioElement = document.querySelector('.profile__bio');
-let bioInput = document.querySelector('.popup__input_bio');
+let bioInput = document.querySelector('.popup__input_type_bio');
 
 let popup = document.querySelector('.popup');
 
