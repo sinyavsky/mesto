@@ -20,12 +20,12 @@
         <div class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit" title="Редактировать профиль" type="button"></button>
+            <button class="profile__edit" title="Редактировать профиль" aria-label="Редактировать профиль" type="button"></button>
           </div>         
           <p class="profile__bio">Исследователь океана</p>          
         </div>
       </div>    
-      <button class="profile__add" type="button"></button>  
+      <button class="profile__add" type="button" aria-label="Добавить фото"></button>  
     </section>
     <section class="cards">
       <ul class="cards__list">
@@ -34,7 +34,7 @@
             <img src="images/most-zolotye-vorota.jpg" alt="Мост Золотые Ворота" class="card__picture" title="Мост Золотые Ворота">
             <figcaption class="card__description">
               <h2 class="card__name" title="Мост Золотые Ворота">Мост Золотые Ворота</h2>
-              <button class="card__like" type="button"></button>
+              <button class="card__like" type="button" aria-label="Нравится"></button>
             </figcaption>
           </figure>
         </li>
@@ -43,7 +43,7 @@
             <img src="images/karpatos.jpg" alt="Карпатос" class="card__picture" title="Карпатос">
             <figcaption class="card__description">
               <h2 class="card__name" title="Карпатос">Карпатос</h2>
-              <button class="card__like" type="button"></button>
+              <button class="card__like" type="button" aria-label="Нравится"></button>
             </figcaption>
           </figure>
         </li>
@@ -52,7 +52,7 @@
             <img src="images/berlinskiy-kafedralnyy-sobor.jpg" alt="Берлинский Кафедральный Собор" class="card__picture" title="Берлинский Кафедральный Собор">
             <figcaption class="card__description">
               <h2 class="card__name" title="Берлинский Кафедральный Собор">Берлинский Кафедральный Собор</h2>
-              <button class="card__like" type="button"></button>
+              <button class="card__like" type="button" aria-label="Нравится"></button>
             </figcaption>
           </figure>
         </li>        
@@ -61,7 +61,7 @@
             <img src="images/krasnaya-ploshad.jpg" alt="Красная Площадь" class="card__picture" title="Красная Площадь">
             <figcaption class="card__description">
               <h2 class="card__name" title="Красная Площадь">Красная Площадь</h2>
-              <button class="card__like" type="button"></button>
+              <button class="card__like" type="button" aria-label="Нравится"></button>
             </figcaption>
           </figure>
         </li>
@@ -70,7 +70,7 @@
             <img src="images/dzhaypur.jpg" alt="Джайпур" class="card__picture" title="Джайпур">
             <figcaption class="card__description">
               <h2 class="card__name" title="Джайпур">Джайпур</h2>
-              <button class="card__like" type="button"></button>
+              <button class="card__like" type="button" aria-label="Нравится"></button>
             </figcaption>
           </figure>
         </li>
@@ -79,7 +79,7 @@
             <img src="images/eyfeleva-bashnya.jpg" alt="Эйфелева Башня" class="card__picture" title="Эйфелева Башня">
             <figcaption class="card__description">
               <h2 class="card__name" title="Эйфелева Башня">Эйфелева Башня</h2>
-              <button class="card__like" type="button"></button>
+              <button class="card__like" type="button" aria-label="Нравится"></button>
             </figcaption>
           </figure>
         </li>
@@ -91,7 +91,7 @@
   </footer>
   <div class="popup">
     <div class="popup__container">
-      <button class="popup__close" title="Закрыть" type="button"></button>
+      <button class="popup__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
       <form action="post" class="popup__form" name="edit_profile">        
         <h2 class="popup__heading">Редактировать профиль</h2>
         <input type="text" class="popup__input popup__input_type_name" value="" placeholder="Имя" name="user_name">
