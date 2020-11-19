@@ -1,41 +1,39 @@
+// для регистрации событий
 let profileEditButton = document.querySelector('.profile__edit');
-profileEditButton.addEventListener('click',onPopupOpen);
-
 let popupCloseButton = document.querySelector('.popup__close');
-popupCloseButton.addEventListener('click',onPopupClose);
-
 let popupForm = document.querySelector('.popup__form');
-popupForm.addEventListener('submit',onPopupFormSubmit);
 
-function onPopupOpen() {
-  let nameValue = document.querySelector('.profile__name').textContent;
-  let nameInput = document.querySelector('.popup__input_name');
-  nameInput.value = nameValue;
+// для обращения внутри функций
+let nameElement = document.querySelector('.profile__name');
+let nameInput = document.querySelector('.popup__input_name');
 
-  let bioValue = document.querySelector('.profile__bio').textContent;
-  let bioInput = document.querySelector('.popup__input_bio');
-  bioInput.value = bioValue;
+let bioElement = document.querySelector('.profile__bio');
+let bioInput = document.querySelector('.popup__input_bio');
 
-  let popup = document.querySelector('.popup');
+let popup = document.querySelector('.popup');
+
+
+function onPopupOpen() {  
+  nameInput.value = nameElement.textContent;
+  bioInput.value = bioElement.textContent;
+  
   popup.classList.add('popup_opened');
 }
 
 function onPopupClose() {
-  let popup = document.querySelector('.popup');
   popup.classList.remove('popup_opened');
 }
 
 function onPopupFormSubmit(e) {
   e.preventDefault();
-  
-  let nameValue = document.querySelector('.popup__input_name').value;
-  let profileName = document.querySelector('.profile__name');
-  profileName.textContent = nameValue;
 
-  let bioValue = document.querySelector('.popup__input_bio').value;
-  let profileBio = document.querySelector('.profile__bio');
-  profileBio.textContent = bioValue;
+  nameElement.textContent = nameInput.value;  
+  bioElement.textContent = bioInput.value;
 
-  let popup = document.querySelector('.popup');
   popup.classList.remove('popup_opened');
 }
+
+
+profileEditButton.addEventListener('click',onPopupOpen);
+popupCloseButton.addEventListener('click',onPopupClose);
+popupForm.addEventListener('submit',onPopupFormSubmit);
