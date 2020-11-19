@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Приложение Mesto</title>
   <link href="pages/index.css" rel="stylesheet">
 </head>
+
 <body class="page">
   <!-- 
     Привет!
@@ -23,23 +25,25 @@
   </header>
   <main class="page__container">
     <section class="profile">
-      <div class="profile__user">             
+      <div class="profile__user">
         <img src="images/avatar.jpg" alt="Жак-Ив Кусто - фото профиля" class="profile__ava">
         <div class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit" title="Редактировать профиль" aria-label="Редактировать профиль" type="button"></button>
-          </div>         
-          <p class="profile__bio">Исследователь океана</p>          
+            <button class="profile__edit" title="Редактировать профиль" aria-label="Редактировать профиль"
+              type="button"></button>
+          </div>
+          <p class="profile__bio">Исследователь океана</p>
         </div>
-      </div>    
-      <button class="profile__add" type="button" aria-label="Добавить фото"></button>  
+      </div>
+      <button class="profile__add" type="button" aria-label="Добавить фото"></button>
     </section>
     <section class="cards">
       <ul class="cards__list">
         <li>
           <figure class="card">
-            <img src="images/most-zolotye-vorota.jpg" alt="Мост Золотые Ворота" class="card__picture" title="Мост Золотые Ворота">
+            <img src="images/most-zolotye-vorota.jpg" alt="Мост Золотые Ворота" class="card__picture"
+              title="Мост Золотые Ворота">
             <figcaption class="card__description">
               <h2 class="card__name" title="Мост Золотые Ворота">Мост Золотые Ворота</h2>
               <button class="card__like" type="button" aria-label="Нравится"></button>
@@ -57,13 +61,14 @@
         </li>
         <li>
           <figure class="card">
-            <img src="images/berlinskiy-kafedralnyy-sobor.jpg" alt="Берлинский Кафедральный Собор" class="card__picture" title="Берлинский Кафедральный Собор">
+            <img src="images/berlinskiy-kafedralnyy-sobor.jpg" alt="Берлинский Кафедральный Собор" class="card__picture"
+              title="Берлинский Кафедральный Собор">
             <figcaption class="card__description">
               <h2 class="card__name" title="Берлинский Кафедральный Собор">Берлинский Кафедральный Собор</h2>
               <button class="card__like" type="button" aria-label="Нравится"></button>
             </figcaption>
           </figure>
-        </li>        
+        </li>
         <li>
           <figure class="card">
             <img src="images/krasnaya-ploshad.jpg" alt="Красная Площадь" class="card__picture" title="Красная Площадь">
@@ -100,14 +105,17 @@
   <div class="popup">
     <div class="popup__container">
       <button class="popup__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
-      <form action="post" class="popup__form" name="edit-profile">        
+      <form action="post" class="popup__form" name="edit-profile">
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__input_type_name" value="" placeholder="Имя" name="user-name" required>
-        <input type="text" class="popup__input popup__input_type_bio" value="" placeholder="О себе" name="user-bio" required>
+        <input type="text" class="popup__input popup__input_type_name" value="" placeholder="Имя" name="user-name"
+          required>
+        <input type="text" class="popup__input popup__input_type_bio" value="" placeholder="О себе" name="user-bio"
+          required>
         <button type="submit" class="popup__submit">Сохранить</button>
       </form>
     </div>
   </div>
   <script src="js/script.js"></script>
 </body>
+
 </html>
