@@ -30,7 +30,7 @@ function onPopupFormSubmit(e) {
   nameElement.textContent = nameInput.value;  
   bioElement.textContent = bioInput.value;
 
-  popup.classList.remove('popup_opened');
+  onPopupClose();
 }
 
 
