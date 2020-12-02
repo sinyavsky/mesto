@@ -28,7 +28,7 @@ const initialCards = [
 ]; 
 
 
-// переменные для редактирования профиля
+// объекты для редактирования профиля
 
 const profileEditButton = document.querySelector('.profile__edit');
 const profilePopup = document.querySelector('.popup_type_profile');
@@ -42,9 +42,17 @@ const profileBioElement = document.querySelector('.profile__bio');
 const profileBioInput = document.querySelector('.popup__input_type_bio');
 
 
-// переменные для карточек
+// объекты для добавления карточек
 
-let cardsContainer = document.querySelector('.cards__list');
+const placeAddButton = document.querySelector('.profile__add');
+const placePopup = document.querySelector('.popup_type_place');
+const placeForm = document.querySelector('.popup__form_type_place');
+const placePopupCloseButton = document.querySelector('.popup__close_type_place');
+
+const placeNameInput = document.querySelector('.popup__input_type_place-name');
+const placePicInput = document.querySelector('.popup__input_type_place-pic');
+
+const cardsList = document.querySelector('.cards__list');
 
 
 // функции для профиля
@@ -70,33 +78,57 @@ function submitProfileForm(e) {
 }
 
 
-// функции для карточек
+// функции для добавления карточек
 
-function loadInitialCards() {  
+function addNewCard(name, link) {
   const cardTemplate = document.querySelector('.card-template').content;
 
-  initialCards.forEach((item) => {
-      const newCard = cardTemplate.cloneNode(true);
-      const newCardPic = newCard.querySelector('.card__picture');
-      const newCardName = newCard.querySelector('.card__name');
+  const newCard = cardTemplate.cloneNode(true);  
+  const newCardName = newCard.querySelector('.card__name');
+  const newCardPic = newCard.querySelector('.card__picture');
 
-      // длинные названия не поместятся, поэтому утанавливаем и title
-      newCardName.textContent = item.name;
-      newCardName.title = item.name;
+  // длинные названия не поместятся, поэтому утанавливаем и title
+  newCardName.textContent = name;
+  newCardName.title = name;
 
-      newCardPic.src = item.link;
-      newCardPic.alt = item.name;
-      newCardPic.title = item.name;
+  newCardPic.src = link;
+  newCardPic.alt = name;
+  newCardPic.title = name;
       
-      cardsContainer.append(newCard);
-    });
+  cardsList.append(newCard);
+}
+
+function openPlacePopup() {      
+  placePopup.classList.add('popup_opened');
+}
+
+function closePlacePopup() {
+  placePopup.classList.remove('popup_opened');
+}
+
+function submitPlaceForm(e) {
+  e.preventDefault();  
+  addNewCard(placeNameInput.value,placePicInput.value);
+
+  placeNameInput.value = '';
+  placePicInput.value = '';
+  
+  closePlacePopup();
 }
 
 
 // привязка к событиям
 
-document.addEventListener('DOMContentLoaded',loadInitialCards);
+document.addEventListener('DOMContentLoaded',() => {  
+  initialCards.forEach((item) => {
+      addNewCard(item.name,item.link);      
+    });
+});
 
 profileEditButton.addEventListener('click',openProfilePopup);
 profilePopupCloseButton.addEventListener('click',closeProfilePopup);
 profileForm.addEventListener('submit',submitProfileForm);
+
+placeAddButton.addEventListener('click',openPlacePopup);
+placePopupCloseButton.addEventListener('click',closePlacePopup);
+placeForm.addEventListener('submit',submitPlaceForm);
