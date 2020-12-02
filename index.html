@@ -31,62 +31,6 @@
     </section>
     <section class="cards">
       <ul class="cards__list">
-        <li>
-          <figure class="card">
-            <img src="images/most-zolotye-vorota.jpg" alt="Мост Золотые Ворота" class="card__picture"
-              title="Мост Золотые Ворота">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Мост Золотые Ворота">Мост Золотые Ворота</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/karpatos.jpg" alt="Карпатос" class="card__picture" title="Карпатос">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Карпатос">Карпатос</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/berlinskiy-kafedralnyy-sobor.jpg" alt="Берлинский Кафедральный Собор" class="card__picture"
-              title="Берлинский Кафедральный Собор">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Берлинский Кафедральный Собор">Берлинский Кафедральный Собор</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/krasnaya-ploshad.jpg" alt="Красная Площадь" class="card__picture" title="Красная Площадь">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Красная Площадь">Красная Площадь</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/dzhaypur.jpg" alt="Джайпур" class="card__picture" title="Джайпур">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Джайпур">Джайпур</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/eyfeleva-bashnya.jpg" alt="Эйфелева Башня" class="card__picture" title="Эйфелева Башня">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Эйфелева Башня">Эйфелева Башня</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
       </ul>
     </section>
   </main>
@@ -106,6 +50,17 @@
       </form>
     </div>
   </div>
+  <template class="card-template">
+    <li>
+      <figure class="card">
+        <img alt="" class="card__picture">
+        <figcaption class="card__description">
+          <h2 class="card__name"></h2>
+          <button class="card__like" type="button" aria-label="Нравится"></button>
+        </figcaption>
+      </figure>
+    </li>
+  </template>
   <script src="js/script.js"></script>
 </body>
 
