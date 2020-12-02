@@ -1,4 +1,5 @@
 // стартовый набор карточек
+
 const initialCards = [
   {
       name: 'Мост Золотые Ворота',
@@ -26,41 +27,50 @@ const initialCards = [
   }
 ]; 
 
-// для регистрации событий
-let profileEditButton = document.querySelector('.profile__edit');
-let popupCloseButton = document.querySelector('.popup__close');
-let popupForm = document.querySelector('.popup__form');
 
-// для обращения внутри функций
-let nameElement = document.querySelector('.profile__name');
-let nameInput = document.querySelector('.popup__input_type_name');
+// переменные для редактирования профиля
 
-let bioElement = document.querySelector('.profile__bio');
-let bioInput = document.querySelector('.popup__input_type_bio');
+const profileEditButton = document.querySelector('.profile__edit');
+const profilePopup = document.querySelector('.popup_type_profile');
+const profileForm = document.querySelector('.popup__form_type_profile');
+const profilePopupCloseButton = document.querySelector('.popup__close_type_profile');
 
-let popup = document.querySelector('.popup');
+const profileNameElement = document.querySelector('.profile__name');
+const profileNameInput = document.querySelector('.popup__input_type_name');
+
+const profileBioElement = document.querySelector('.profile__bio');
+const profileBioInput = document.querySelector('.popup__input_type_bio');
+
+
+// переменные для карточек
 
 let cardsContainer = document.querySelector('.cards__list');
 
-function onPopupOpen() {  
-  nameInput.value = nameElement.textContent;
-  bioInput.value = bioElement.textContent;
+
+// функции для профиля
+
+function openProfilePopup() {  
+  profileNameInput.value = profileNameElement.textContent;
+  profileBioInput.value = profileBioElement.textContent;
   
-  popup.classList.add('popup_opened');
+  profilePopup.classList.add('popup_opened');
 }
 
-function onPopupClose() {
-  popup.classList.remove('popup_opened');
+function closeProfilePopup() {
+  profilePopup.classList.remove('popup_opened');
 }
 
-function onPopupFormSubmit(e) {
+function submitProfileForm(e) {
   e.preventDefault();
 
-  nameElement.textContent = nameInput.value;  
-  bioElement.textContent = bioInput.value;
+  profileNameElement.textContent = profileNameInput.value;  
+  profileBioElement.textContent = profileBioInput.value;
 
-  onPopupClose();
+  closeProfilePopup();
 }
+
+
+// функции для карточек
 
 function loadInitialCards() {  
   const cardTemplate = document.querySelector('.card-template').content;
@@ -82,8 +92,11 @@ function loadInitialCards() {
     });
 }
 
+
+// привязка к событиям
+
 document.addEventListener('DOMContentLoaded',loadInitialCards);
 
-profileEditButton.addEventListener('click',onPopupOpen);
-popupCloseButton.addEventListener('click',onPopupClose);
-popupForm.addEventListener('submit',onPopupFormSubmit);
+profileEditButton.addEventListener('click',openProfilePopup);
+profilePopupCloseButton.addEventListener('click',closeProfilePopup);
+profileForm.addEventListener('submit',submitProfileForm);
