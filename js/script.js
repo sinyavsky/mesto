@@ -95,7 +95,9 @@ function addNewCard(name, link) {
   newCardPic.alt = name;
   newCardPic.title = name;
       
+  bindCardEvents(newCard);
   cardsList.append(newCard);
+  
 }
 
 function openPlacePopup() {      
@@ -117,6 +119,17 @@ function submitPlaceForm(e) {
 }
 
 
+// функции для изменения состояния карточек
+
+function bindCardEvents(card) {
+  card.querySelector('.card__like').addEventListener('click',toggleLike);
+}
+
+function toggleLike(evt) {
+  evt.target.classList.toggle('card__like_active');
+}
+
+
 // привязка к событиям
 
 document.addEventListener('DOMContentLoaded',() => {  
@@ -132,3 +145,4 @@ profileForm.addEventListener('submit',submitProfileForm);
 placeAddButton.addEventListener('click',openPlacePopup);
 placePopupCloseButton.addEventListener('click',closePlacePopup);
 placeForm.addEventListener('submit',submitPlaceForm);
+
