@@ -123,10 +123,15 @@ function submitPlaceForm(e) {
 
 function bindCardEvents(card) {
   card.querySelector('.card__like').addEventListener('click',toggleLike);
+  card.querySelector('.card__remove').addEventListener('click',removeCard)
 }
 
 function toggleLike(evt) {
   evt.target.classList.toggle('card__like_active');
+}
+
+function removeCard(evt) {
+  evt.target.closest('.card-list__item').remove();
 }
 
 

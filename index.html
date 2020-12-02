@@ -9,6 +9,10 @@
 </head>
 
 <body class="page">
+  <!-- 
+    не уверен, стоит ли оставлять карточки как figure
+  -->
+
   <header class="header">
     <a href="index.html">
       <img src="images/logo.svg" alt="Место" class="header__logo">
@@ -64,8 +68,9 @@
     </div>
   </div>
   <template class="card-template">
-    <li>
+    <li class="card-list__item">
       <figure class="card">
+        <button class="card__remove" type="button" aria-label="Удалить"></button>
         <img alt="" class="card__picture">
         <figcaption class="card__description">
           <h2 class="card__name"></h2>
