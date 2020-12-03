@@ -1,39 +1,189 @@
-// для регистрации событий
-let profileEditButton = document.querySelector('.profile__edit');
-let popupCloseButton = document.querySelector('.popup__close');
-let popupForm = document.querySelector('.popup__form');
+// стартовый набор карточек
 
-// для обращения внутри функций
-let nameElement = document.querySelector('.profile__name');
-let nameInput = document.querySelector('.popup__input_type_name');
+const initialCards = [
+  {
+      name: 'Мост Золотые Ворота',
+      link: 'images/most-zolotye-vorota.jpg'
+  },
+  {
+      name: 'Карпатос',
+      link: 'images/karpatos.jpg'
+  },
+  {
+      name: 'Берлинский Кафедральный Собор',
+      link: 'images/berlinskiy-kafedralnyy-sobor.jpg'
+  },
+  {
+      name: 'Красная Площадь',
+      link: 'images/krasnaya-ploshad.jpg'
+  },
+  {
+      name: 'Джайпур',
+      link: 'images/dzhaypur.jpg'
+  },
+  {
+      name: 'Эйфелева Башня',
+      link: 'images/eyfeleva-bashnya.jpg'
+  }
+]; 
 
-let bioElement = document.querySelector('.profile__bio');
-let bioInput = document.querySelector('.popup__input_type_bio');
 
-let popup = document.querySelector('.popup');
+// объекты для редактирования профиля
+
+const profileEditButton = document.querySelector('.profile__edit');
+const profilePopup = document.querySelector('.popup_type_profile');
+const profileForm = document.querySelector('.popup__form_type_profile');
+const profilePopupCloseButton = document.querySelector('.popup__close_type_profile');
+
+const profileNameElement = document.querySelector('.profile__name');
+const profileNameInput = document.querySelector('.popup__input_type_name');
+
+const profileBioElement = document.querySelector('.profile__bio');
+const profileBioInput = document.querySelector('.popup__input_type_bio');
 
 
-function onPopupOpen() {  
-  nameInput.value = nameElement.textContent;
-  bioInput.value = bioElement.textContent;
+// объекты для добавления карточек
+
+const placeAddButton = document.querySelector('.profile__add');
+const placePopup = document.querySelector('.popup_type_place');
+const placeForm = document.querySelector('.popup__form_type_place');
+const placePopupCloseButton = document.querySelector('.popup__close_type_place');
+
+const placeNameInput = document.querySelector('.popup__input_type_place-name');
+const placePicInput = document.querySelector('.popup__input_type_place-pic');
+
+const cardTemplate = document.querySelector('.card-template').content;
+const cardsList = document.querySelector('.cards__list');
+
+
+// объекты для увеличения картинок
+
+const picturePopup = document.querySelector('.popup-picture');
+const picturePopupCloseButton = document.querySelector('.popup-picture__close');
+const popupPictureTemplate = document.querySelector('.popup-picture-template').content;
+
+
+// функции для профиля
+
+function openProfilePopup() {  
+  profileNameInput.value = profileNameElement.textContent;
+  profileBioInput.value = profileBioElement.textContent;
   
-  popup.classList.add('popup_opened');
+  profilePopup.classList.add('popup_opened');
 }
 
-function onPopupClose() {
-  popup.classList.remove('popup_opened');
+function closeProfilePopup() {
+  profilePopup.classList.remove('popup_opened');
 }
 
-function onPopupFormSubmit(e) {
+function submitProfileForm(e) {
   e.preventDefault();
 
-  nameElement.textContent = nameInput.value;  
-  bioElement.textContent = bioInput.value;
+  profileNameElement.textContent = profileNameInput.value;  
+  profileBioElement.textContent = profileBioInput.value;
 
-  onPopupClose();
+  closeProfilePopup();
 }
 
 
-profileEditButton.addEventListener('click',onPopupOpen);
-popupCloseButton.addEventListener('click',onPopupClose);
-popupForm.addEventListener('submit',onPopupFormSubmit);
+// функции для взаимодействия с карточками
+
+function toggleLike(evt) {
+  evt.target.classList.toggle('card__like_active');
+}
+
+function removeCard(evt) {
+  evt.target.closest('.card-list__item').remove();
+}
+
+
+// функции для добавления карточек
+
+function bindCardEvents(card) {
+  card.querySelector('.card__like').addEventListener('click',toggleLike);
+  card.querySelector('.card__remove').addEventListener('click',removeCard)
+  card.querySelector('.card__picture').addEventListener('click',zoomPicture);
+}
+
+function addNewCard(name, link) {
+  const newCard = cardTemplate.cloneNode(true);   
+  const newCardName = newCard.querySelector('.card__name');
+  const newCardPic = newCard.querySelector('.card__picture');
+
+  // длинные названия не поместятся, поэтому утанавливаем и title
+  newCardName.textContent = name;
+  newCardName.title = name;
+
+  newCardPic.src = link;
+  newCardPic.alt = name;
+  newCardPic.title = name;
+      
+  bindCardEvents(newCard);
+  cardsList.prepend(newCard);  
+}
+
+function openPlacePopup() {      
+  placePopup.classList.add('popup_opened');
+}
+
+function closePlacePopup() {
+  placePopup.classList.remove('popup_opened');
+}
+
+function submitPlaceForm(e) {
+  e.preventDefault();  
+  addNewCard(placeNameInput.value,placePicInput.value);
+
+  placeNameInput.value = '';
+  placePicInput.value = '';
+  
+  closePlacePopup();
+}
+
+
+// функции для увеличения картинок
+
+function openPicturePopup() {
+  picturePopup.classList.add('popup-picture_opened');
+}
+
+function closePicturePopup() {
+  picturePopup.classList.remove('popup-picture_opened');
+}
+
+function zoomPicture(evt) {
+  const contentCurrent = document.querySelector('.popup-picture__content');
+  const contentNew = popupPictureTemplate.cloneNode(true);  
+  
+  const picture = contentNew.querySelector('.popup-picture__img');
+  const name = contentNew.querySelector('.popup-picture__name');
+
+  // это выглядит стрёмно, возможно лучше делать через querySelector от родителя
+  const nameText = evt.target.nextElementSibling.children[0].textContent;
+
+  picture.src = evt.target.src;
+  picture.alt = nameText;
+  name.textContent = nameText; 
+
+  contentCurrent.replaceWith(contentNew);
+  openPicturePopup();  
+}
+
+
+// привязка к событиям
+
+document.addEventListener('DOMContentLoaded',() => {  // демонстрация, что я освоил стрелочные функции :)  
+  initialCards.forEach((item) => {
+      addNewCard(item.name,item.link);      
+    });
+});
+
+profileEditButton.addEventListener('click',openProfilePopup);
+profilePopupCloseButton.addEventListener('click',closeProfilePopup);
+profileForm.addEventListener('submit',submitProfileForm);
+
+placeAddButton.addEventListener('click',openPlacePopup);
+placePopupCloseButton.addEventListener('click',closePlacePopup);
+placeForm.addEventListener('submit',submitPlaceForm);
+
+picturePopupCloseButton.addEventListener('click',closePicturePopup);

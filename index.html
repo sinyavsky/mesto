@@ -8,27 +8,35 @@
   <link href="pages/index.css" rel="stylesheet">
 </head>
 
-<body class="page">
+<body class="page"> 
   <!-- 
-    Привет!
 
-    Все правки внесены, кроме:
+    Привет! Подготовил несколько комментариев :)
 
-    >>Для задания внешней геометрии и позиционирования блока можно использовать микс с элементом родительского блока
-    Т.к. не понял, к каким элементам это относится :(
+    
+    1. Для поп-апа добавления новой карточки использовал тот же блок, что и для поп-апа редактирования профиля, 
+    т.к. эти два поп-апа очень похожи. Хотя некоторые отличия в макетах этих поп-апов всё же есть: немного отличаются 
+    отступы в форме, а также кнопка закрытия поп-апа: в макете поп-апа профиля для 320px кнопка закрытия расположена
+    сверху (макет предыдущего спринта, скриншот: https://i.imgur.com/hOJB3Ww.png ), а в макете поп-апа карточек -
+    сверху-справа (макет текущего спринта, скриншот: https://i.imgur.com/hOJB3Ww.png )
+    Я придерживался последней версии макета и расположил кнопку закрытия сверху-справа.
 
-    Ещё ссылке с логотипа я добавил атрибут target="_self", т.к. без этого атрибута автотест выдавал следующую ошибку:
-    >>В файле index.html на строке 24 атрибуту target не хватает значения.
-    (скриншот ошибки: https://i.imgur.com/aJPrX2u.png )
+    2. Если открыть форму добавления карточки, ввести туда значения, а затем закрыть форму (не сохраняя) - при 
+    повторном открытии формы поля будут заполнены предыдущими значениями. Я намеренно их не очищал (не ясно, нужно ли
+    это делать)
 
-    Я писал в техподдержку с этим вопросом - меня отправили к куратору. Наставник в слаке предложил попробовать добавить
-    атрибут target="_self" - я так и сделал. Если читаете это сообщение, значит автотест это решение пропустил :)
+    3. В прошлом спринте я сделал карточки через figure. Сейчас в них добавилась кнопка удаления - теперь не уверен,
+    что тег figure тут уместен. Если скажете избавиться от него - так и сделаю :)
 
-    Спасибо за подробное ревью!
+    4. Увеличение картинки сделал при клике на тег <img>. Есть мнение, что это не совсем правильно и лучше обернуть его
+    в тег <a> и привязать событие увеличения именно к ссылке.
+
+    
+    Хорошего дня!
+
   -->
   <header class="header">
-    <!-- вот эта роковая строка, на которую ругались автотесты -->
-    <a href="index.html" target="_self">
+    <a href="index.html">
       <img src="images/logo.svg" alt="Место" class="header__logo">
     </a>
   </header>
@@ -49,81 +57,63 @@
     </section>
     <section class="cards">
       <ul class="cards__list">
-        <li>
-          <figure class="card">
-            <img src="images/most-zolotye-vorota.jpg" alt="Мост Золотые Ворота" class="card__picture"
-              title="Мост Золотые Ворота">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Мост Золотые Ворота">Мост Золотые Ворота</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/karpatos.jpg" alt="Карпатос" class="card__picture" title="Карпатос">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Карпатос">Карпатос</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/berlinskiy-kafedralnyy-sobor.jpg" alt="Берлинский Кафедральный Собор" class="card__picture"
-              title="Берлинский Кафедральный Собор">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Берлинский Кафедральный Собор">Берлинский Кафедральный Собор</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/krasnaya-ploshad.jpg" alt="Красная Площадь" class="card__picture" title="Красная Площадь">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Красная Площадь">Красная Площадь</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/dzhaypur.jpg" alt="Джайпур" class="card__picture" title="Джайпур">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Джайпур">Джайпур</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="card">
-            <img src="images/eyfeleva-bashnya.jpg" alt="Эйфелева Башня" class="card__picture" title="Эйфелева Башня">
-            <figcaption class="card__description">
-              <h2 class="card__name" title="Эйфелева Башня">Эйфелева Башня</h2>
-              <button class="card__like" type="button" aria-label="Нравится"></button>
-            </figcaption>
-          </figure>
-        </li>
       </ul>
     </section>
   </main>
   <footer class="footer">
     &copy; 2020 Mesto Russia
   </footer>
-  <div class="popup">
+  <div class="popup popup_type_profile">
     <div class="popup__container">
-      <button class="popup__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
-      <form action="post" class="popup__form" name="edit-profile">
+      <button class="popup__close popup__close_type_profile" title="Закрыть" aria-label="Закрыть" type="button"></button>
+      <form action="post" class="popup__form popup__form_type_profile" name="edit-profile">
         <h2 class="popup__heading">Редактировать профиль</h2>
         <input type="text" class="popup__input popup__input_type_name" value="" placeholder="Имя" name="user-name"
           required>
         <input type="text" class="popup__input popup__input_type_bio" value="" placeholder="О себе" name="user-bio"
           required>
-        <button type="submit" class="popup__submit">Сохранить</button>
+        <button type="submit" class="popup__submit popup__submit_type_profile">Сохранить</button>
       </form>
     </div>
   </div>
+  <div class="popup popup_type_place">
+    <div class="popup__container">
+      <button class="popup__close popup__close_type_place" title="Закрыть" aria-label="Закрыть" type="button"></button>
+      <form action="post" class="popup__form popup__form_type_place" name="add-place">
+        <h2 class="popup__heading">Новое место</h2>
+        <input type="text" class="popup__input popup__input_type_place-name" value="" placeholder="Название" name="place-name"
+          required>
+        <input type="text" class="popup__input popup__input_type_place-pic" value="" placeholder="Ссылка на картинку" name="place-pic"
+          required>
+        <button type="submit" class="popup__submit popup__submit_type_place">Создать</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup-picture">
+    <div class="popup-picture__container">
+      <button class="popup-picture__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
+      <div class="popup-picture__content">        
+      </div>
+    </div>
+  </div>
+  <template class="card-template">
+    <li class="card-list__item">
+      <figure class="card">
+        <button class="card__remove" type="button" aria-label="Удалить"></button>
+        <img alt="" class="card__picture">
+        <figcaption class="card__description">
+          <h2 class="card__name"></h2>
+          <button class="card__like" type="button" aria-label="Нравится"></button>
+        </figcaption>
+      </figure>
+    </li>
+  </template>
+  <template class="popup-picture-template">
+    <div class="popup-picture__content">
+      <img src="" alt="" class="popup-picture__img">
+      <p class="popup-picture__name"></p>
+    </div>
+  </template>
   <script src="js/script.js"></script>
 </body>
 
