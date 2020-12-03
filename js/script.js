@@ -99,7 +99,7 @@ function removeCard(evt) {
 
 // функции для добавления карточек
 
-function addNewCard(name, link) {
+function createCard(name, link) {
   const newCard = cardTemplate.cloneNode(true);   
   const newCardName = newCard.querySelector('.card__name');
   const newCardPic = newCard.querySelector('.card__picture');
@@ -117,7 +117,11 @@ function addNewCard(name, link) {
   newCard.querySelector('.card__like').addEventListener('click',toggleLike);
   newCard.querySelector('.card__remove').addEventListener('click',removeCard)
   
-  cardsList.prepend(newCard);  
+  return newCard;  
+}
+
+function addCard(container, element) {
+  container.prepend(element);
 }
 
 function openPlacePopup() {      
@@ -130,7 +134,7 @@ function closePlacePopup() {
 
 function submitPlaceForm(e) {
   e.preventDefault();  
-  addNewCard(placeNameInput.value,placePicInput.value);
+  addCard(cardsList,createCard(placeNameInput.value,placePicInput.value));
 
   placeNameInput.value = '';
   placePicInput.value = '';
@@ -172,7 +176,7 @@ function zoomPicture(evt) {
 
 document.addEventListener('DOMContentLoaded',() => {  // демонстрация, что я освоил стрелочные функции :)  
   initialCards.forEach((item) => {
-      addNewCard(item.name,item.link);      
+      addCard(cardsList,createCard(item.name,item.link));      
     });
 });
 
