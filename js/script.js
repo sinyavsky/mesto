@@ -62,6 +62,7 @@ const picturePopup = document.querySelector('.popup-picture');
 const picturePopupCloseButton = document.querySelector('.popup-picture__close');
 const popupPictureTemplate = document.querySelector('.popup-picture-template').content;
 
+
 // функции для профиля
 
 function openProfilePopup() {  
@@ -85,13 +86,7 @@ function submitProfileForm(e) {
 }
 
 
-// функции для изменения состояния карточек
-
-function bindCardEvents(card) {
-  card.querySelector('.card__like').addEventListener('click',toggleLike);
-  card.querySelector('.card__remove').addEventListener('click',removeCard)
-  card.querySelector('.card__picture').addEventListener('click',zoomPicture);
-}
+// функции для взаимодействия с карточками
 
 function toggleLike(evt) {
   evt.target.classList.toggle('card__like_active');
@@ -103,6 +98,12 @@ function removeCard(evt) {
 
 
 // функции для добавления карточек
+
+function bindCardEvents(card) {
+  card.querySelector('.card__like').addEventListener('click',toggleLike);
+  card.querySelector('.card__remove').addEventListener('click',removeCard)
+  card.querySelector('.card__picture').addEventListener('click',zoomPicture);
+}
 
 function addNewCard(name, link) {
   const newCard = cardTemplate.cloneNode(true);   
@@ -157,6 +158,7 @@ function zoomPicture(evt) {
   const picture = contentNew.querySelector('.popup-picture__img');
   const name = contentNew.querySelector('.popup-picture__name');
 
+  // это выглядит стрёмно, возможно лучше делать через querySelector от родителя
   const nameText = evt.target.nextElementSibling.children[0].textContent;
 
   picture.src = evt.target.src;
@@ -170,7 +172,7 @@ function zoomPicture(evt) {
 
 // привязка к событиям
 
-document.addEventListener('DOMContentLoaded',() => {  
+document.addEventListener('DOMContentLoaded',() => {  // демонстрация, что я освоил стрелочные функции :)  
   initialCards.forEach((item) => {
       addNewCard(item.name,item.link);      
     });
