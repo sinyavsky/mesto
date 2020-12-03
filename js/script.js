@@ -136,10 +136,7 @@ function closePlacePopup() {
 function submitPlaceForm(e) {
   e.preventDefault();  
   addCard(cardsList,createCard(placeNameInput.value,placePicInput.value));
-
-  placeNameInput.value = '';
-  placePicInput.value = '';
-  
+  placeForm.reset();  
   closePlacePopup();
 }
 
