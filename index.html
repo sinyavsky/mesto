@@ -8,31 +8,12 @@
   <link href="pages/index.css" rel="stylesheet">
 </head>
 
-<body class="page"> 
+<body class="page">
   <!-- 
 
-    Привет! Подготовил несколько комментариев :)
+    Привет! Спасибо за подробное ревью, оно помогло мне лучше разобраться с некоторыми вещами.
 
-
-    1. Для поп-апа добавления новой карточки использовал тот же блок, что и для поп-апа редактирования профиля, 
-    т.к. эти два поп-апа очень похожи. Хотя некоторые отличия в макетах этих поп-апов всё же есть: немного отличаются 
-    отступы в форме, а также кнопка закрытия поп-апа: в макете поп-апа профиля для 320px кнопка закрытия расположена
-    сверху (макет предыдущего спринта, скриншот: https://i.imgur.com/hOJB3Ww.png ), а в макете поп-апа карточек -
-    сверху-справа (макет текущего спринта, скриншот: https://i.imgur.com/hOJB3Ww.png )
-    Я придерживался последней версии макета и расположил кнопку закрытия сверху-справа.
-
-    2. Если открыть форму добавления карточки, ввести туда значения, а затем закрыть форму (не сохраняя) - при 
-    повторном открытии формы поля будут заполнены предыдущими значениями. Я намеренно их не очищал (не ясно, нужно ли
-    это делать)
-
-    3. В прошлом спринте я сделал карточки через figure. Сейчас в них добавилась кнопка удаления - теперь не уверен,
-    что тег figure тут уместен. Если скажете избавиться от него - так и сделаю :)
-
-    4. Увеличение картинки сделал при клике на тег <img>. Есть мнение, что это не совсем правильно и лучше обернуть его
-    в тег <a> и привязать событие увеличения именно к ссылке.
-
-    
-    Хорошего дня!
+    Все замечания исправлены, надеюсь, что всё понял правильно :)    
 
   -->
   <header class="header">
@@ -66,55 +47,48 @@
   </footer>
   <div class="popup popup_type_profile">
     <div class="popup__container">
-      <button class="popup__close popup__close_type_profile" title="Закрыть" aria-label="Закрыть" type="button"></button>
+      <button class="popup__close popup__close_type_profile" title="Закрыть" aria-label="Закрыть"
+        type="button"></button>
       <form action="post" class="popup__form popup__form_type_profile" name="edit-profile">
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__input_type_name" value="" placeholder="Имя" name="user-name"
-          required>
-        <input type="text" class="popup__input popup__input_type_bio" value="" placeholder="О себе" name="user-bio"
-          required>
+        <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="user-name" required>
+        <input type="text" class="popup__input popup__input_type_bio" placeholder="О себе" name="user-bio" required>
         <button type="submit" class="popup__submit popup__submit_type_profile">Сохранить</button>
       </form>
     </div>
   </div>
   <div class="popup popup_type_place">
-    <div class="popup__container">
+    <div class="popup__container popup__container_type_form">
       <button class="popup__close popup__close_type_place" title="Закрыть" aria-label="Закрыть" type="button"></button>
       <form action="post" class="popup__form popup__form_type_place" name="add-place">
         <h2 class="popup__heading">Новое место</h2>
-        <input type="text" class="popup__input popup__input_type_place-name" value="" placeholder="Название" name="place-name"
+        <input type="text" class="popup__input popup__input_type_place-name" placeholder="Название" name="place-name"
           required>
-        <input type="text" class="popup__input popup__input_type_place-pic" value="" placeholder="Ссылка на картинку" name="place-pic"
-          required>
+        <input type="url" class="popup__input popup__input_type_place-pic" placeholder="Ссылка на картинку"
+          name="place-pic" required>
         <button type="submit" class="popup__submit popup__submit_type_place">Создать</button>
       </form>
     </div>
   </div>
-  <div class="popup-picture">
-    <div class="popup-picture__container">
-      <button class="popup-picture__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
-      <div class="popup-picture__content">        
-      </div>
+  <div class="popup popup_type_picture">
+    <div class="popup__container popup__container_type_picture">
+      <button class="popup__close popup__close_type_picture" title="Закрыть" aria-label="Закрыть" type="button"></button>
+      <img src="#" alt="Картинка-заглушка модального окна" class="popup__picture">
+      <p class="popup__picture-name"></p>
     </div>
   </div>
   <template class="card-template">
     <li class="card-list__item">
       <figure class="card">
         <button class="card__remove" type="button" aria-label="Удалить"></button>
-         <!-- автотесты Яндекса не пропускают пустые атрибуты src и alt-->
-        <img src="#" alt="Картинка" class="card__picture">
+        <!-- автотесты Яндекса не пропускают пустые атрибуты src и alt-->
+        <img src="#" alt="Картинка-заглушка шаблона карточки" class="card__picture">
         <figcaption class="card__description">
           <h2 class="card__name"></h2>
           <button class="card__like" type="button" aria-label="Нравится"></button>
         </figcaption>
       </figure>
     </li>
-  </template>
-  <template class="popup-picture-template">
-    <div class="popup-picture__content">     
-      <img src="#" alt="Картинка" class="popup-picture__img">
-      <p class="popup-picture__name"></p>
-    </div>
   </template>
   <script src="js/script.js"></script>
 </body>
