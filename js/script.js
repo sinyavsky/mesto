@@ -85,6 +85,23 @@ function submitProfileForm(e) {
 }
 
 
+// функции для изменения состояния карточек
+
+function bindCardEvents(card) {
+  card.querySelector('.card__like').addEventListener('click',toggleLike);
+  card.querySelector('.card__remove').addEventListener('click',removeCard)
+  card.querySelector('.card__picture').addEventListener('click',zoomPicture);
+}
+
+function toggleLike(evt) {
+  evt.target.classList.toggle('card__like_active');
+}
+
+function removeCard(evt) {
+  evt.target.closest('.card-list__item').remove();
+}
+
+
 // функции для добавления карточек
 
 function addNewCard(name, link) {
@@ -101,8 +118,7 @@ function addNewCard(name, link) {
   newCardPic.title = name;
       
   bindCardEvents(newCard);
-  cardsList.prepend(newCard);
-  
+  cardsList.prepend(newCard);  
 }
 
 function openPlacePopup() {      
@@ -121,23 +137,6 @@ function submitPlaceForm(e) {
   placePicInput.value = '';
   
   closePlacePopup();
-}
-
-
-// функции для изменения состояния карточек
-
-function bindCardEvents(card) {
-  card.querySelector('.card__like').addEventListener('click',toggleLike);
-  card.querySelector('.card__remove').addEventListener('click',removeCard)
-  card.querySelector('.card__picture').addEventListener('click',zoomPicture);
-}
-
-function toggleLike(evt) {
-  evt.target.classList.toggle('card__like_active');
-}
-
-function removeCard(evt) {
-  evt.target.closest('.card-list__item').remove();
 }
 
 
@@ -164,10 +163,10 @@ function zoomPicture(evt) {
   picture.alt = nameText;
   name.textContent = nameText; 
 
-
   contentCurrent.replaceWith(contentNew);
   openPicturePopup();  
 }
+
 
 // привязка к событиям
 
