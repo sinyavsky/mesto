@@ -60,8 +60,9 @@ const cardsList = document.querySelector('.cards__list');
 
 const picturePopup = document.querySelector('.popup-picture');
 const picturePopupCloseButton = document.querySelector('.popup-picture__close');
-const popupPictureTemplate = document.querySelector('.popup-picture-template').content;
 
+const popupPictureImg = document.querySelector('.popup-picture__img');
+const popupPictureName = document.querySelector('.popup-picture__name');
 
 // функции для профиля
 
@@ -154,20 +155,12 @@ function closePicturePopup() {
 }
 
 function zoomPicture(evt) {
-  const contentCurrent = document.querySelector('.popup-picture__content');
-  const contentNew = popupPictureTemplate.cloneNode(true);  
-  
-  const picture = contentNew.querySelector('.popup-picture__img');
-  const name = contentNew.querySelector('.popup-picture__name');
+  const name = evt.target.nextElementSibling.children[0].textContent;
 
-  // это выглядит стрёмно, возможно лучше делать через querySelector от родителя
-  const nameText = evt.target.nextElementSibling.children[0].textContent;
+  popupPictureImg.src = evt.target.src;
+  popupPictureImg.alt = name;
+  popupPictureName.textContent = name; 
 
-  picture.src = evt.target.src;
-  picture.alt = nameText;
-  name.textContent = nameText; 
-
-  contentCurrent.replaceWith(contentNew);
   openPicturePopup();  
 }
 
