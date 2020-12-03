@@ -36,7 +36,8 @@
 
   -->
   <header class="header">
-    <a href="index.html">
+    <!-- автотесты Яндекса не пропускают эту строчку без атрибута target -->
+    <a href="index.html" target="_self">
       <img src="images/logo.svg" alt="Место" class="header__logo">
     </a>
   </header>
@@ -100,7 +101,8 @@
     <li class="card-list__item">
       <figure class="card">
         <button class="card__remove" type="button" aria-label="Удалить"></button>
-        <img alt="" class="card__picture">
+         <!-- автотесты Яндекса не пропускают пустые атрибуты src и alt-->
+        <img src="#" alt="Картинка" class="card__picture">
         <figcaption class="card__description">
           <h2 class="card__name"></h2>
           <button class="card__like" type="button" aria-label="Нравится"></button>
@@ -109,9 +111,8 @@
     </li>
   </template>
   <template class="popup-picture-template">
-    <div class="popup-picture__content">
-      <!-- автотесты Яндекса не пропустили пустой атрибут src -->
-      <img src="#" alt="" class="popup-picture__img">
+    <div class="popup-picture__content">     
+      <img src="#" alt="Картинка" class="popup-picture__img">
       <p class="popup-picture__name"></p>
     </div>
   </template>
