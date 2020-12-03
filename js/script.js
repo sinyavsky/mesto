@@ -101,7 +101,7 @@ function addNewCard(name, link) {
   newCardPic.title = name;
       
   bindCardEvents(newCard);
-  cardsList.append(newCard);
+  cardsList.prepend(newCard);
   
 }
 
