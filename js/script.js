@@ -58,11 +58,11 @@ const cardsList = document.querySelector('.cards__list');
 
 // объекты для увеличения картинок
 
-const picturePopup = document.querySelector('.popup-picture');
-const picturePopupCloseButton = document.querySelector('.popup-picture__close');
+const picturePopup = document.querySelector('.popup_type_picture');
+const picturePopupCloseButton = document.querySelector('.popup__close_type_picture');
 
-const popupPictureImg = document.querySelector('.popup-picture__img');
-const popupPictureName = document.querySelector('.popup-picture__name');
+const popupPictureImg = document.querySelector('.popup__picture');
+const popupPictureName = document.querySelector('.popup__picture-name');
 
 // функции для профиля
 
@@ -144,11 +144,11 @@ function submitPlaceForm(e) {
 // функции для увеличения картинок
 
 function openPicturePopup() {
-  picturePopup.classList.add('popup-picture_opened');
+  picturePopup.classList.add('popup_opened');
 }
 
 function closePicturePopup() {
-  picturePopup.classList.remove('popup-picture_opened');
+  picturePopup.classList.remove('popup_opened');
 }
 
 function zoomPicture(evt) {
