@@ -99,12 +99,6 @@ function removeCard(evt) {
 
 // функции для добавления карточек
 
-function bindCardEvents(card) {
-  card.querySelector('.card__like').addEventListener('click',toggleLike);
-  card.querySelector('.card__remove').addEventListener('click',removeCard)
-  card.querySelector('.card__picture').addEventListener('click',zoomPicture);
-}
-
 function addNewCard(name, link) {
   const newCard = cardTemplate.cloneNode(true);   
   const newCardName = newCard.querySelector('.card__name');
@@ -118,7 +112,11 @@ function addNewCard(name, link) {
   newCardPic.alt = name;
   newCardPic.title = name;
       
-  bindCardEvents(newCard);
+  newCardPic.addEventListener('click',zoomPicture);
+
+  newCard.querySelector('.card__like').addEventListener('click',toggleLike);
+  newCard.querySelector('.card__remove').addEventListener('click',removeCard)
+  
   cardsList.prepend(newCard);  
 }
 
