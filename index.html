@@ -13,7 +13,7 @@
 
     Привет! Подготовил несколько комментариев :)
 
-    
+
     1. Для поп-апа добавления новой карточки использовал тот же блок, что и для поп-апа редактирования профиля, 
     т.к. эти два поп-апа очень похожи. Хотя некоторые отличия в макетах этих поп-апов всё же есть: немного отличаются 
     отступы в форме, а также кнопка закрытия поп-апа: в макете поп-апа профиля для 320px кнопка закрытия расположена
@@ -55,7 +55,7 @@
       </div>
       <button class="profile__add" type="button" aria-label="Добавить фото"></button>
     </section>
-    <section class="cards">
+    <section class="cards" aria-label="Фотографии мест">
       <ul class="cards__list">
       </ul>
     </section>
@@ -110,7 +110,8 @@
   </template>
   <template class="popup-picture-template">
     <div class="popup-picture__content">
-      <img src="" alt="" class="popup-picture__img">
+      <!-- автотесты Яндекса не пропустили пустой атрибут src -->
+      <img src="#" alt="" class="popup-picture__img">
       <p class="popup-picture__name"></p>
     </div>
   </template>
