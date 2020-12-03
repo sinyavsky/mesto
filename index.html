@@ -11,6 +11,7 @@
 <body class="page">
   <!-- 
     не уверен, стоит ли оставлять карточки как figure
+    кнопку закрытия передвинуть вправо, сейчас она сверху
   -->
 
   <header class="header">
@@ -67,6 +68,13 @@
       </form>
     </div>
   </div>
+  <div class="popup-picture">
+    <div class="popup-picture__container">
+      <button class="popup-picture__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
+      <div class="popup-picture__content">        
+      </div>
+    </div>
+  </div>
   <template class="card-template">
     <li class="card-list__item">
       <figure class="card">
@@ -78,6 +86,12 @@
         </figcaption>
       </figure>
     </li>
+  </template>
+  <template class="popup-picture-template">
+    <div class="popup-picture__content">
+      <img src="" alt="" class="popup-picture__img">
+      <p class="popup-picture__name"></p>
+    </div>
   </template>
   <script src="js/script.js"></script>
 </body>

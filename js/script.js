@@ -52,8 +52,15 @@ const placePopupCloseButton = document.querySelector('.popup__close_type_place')
 const placeNameInput = document.querySelector('.popup__input_type_place-name');
 const placePicInput = document.querySelector('.popup__input_type_place-pic');
 
+const cardTemplate = document.querySelector('.card-template').content;
 const cardsList = document.querySelector('.cards__list');
 
+
+// объекты для увеличения картинок
+
+const picturePopup = document.querySelector('.popup-picture');
+const picturePopupCloseButton = document.querySelector('.popup-picture__close');
+const popupPictureTemplate = document.querySelector('.popup-picture-template').content;
 
 // функции для профиля
 
@@ -81,9 +88,7 @@ function submitProfileForm(e) {
 // функции для добавления карточек
 
 function addNewCard(name, link) {
-  const cardTemplate = document.querySelector('.card-template').content;
-
-  const newCard = cardTemplate.cloneNode(true);  
+  const newCard = cardTemplate.cloneNode(true);   
   const newCardName = newCard.querySelector('.card__name');
   const newCardPic = newCard.querySelector('.card__picture');
 
@@ -124,6 +129,7 @@ function submitPlaceForm(e) {
 function bindCardEvents(card) {
   card.querySelector('.card__like').addEventListener('click',toggleLike);
   card.querySelector('.card__remove').addEventListener('click',removeCard)
+  card.querySelector('.card__picture').addEventListener('click',zoomPicture);
 }
 
 function toggleLike(evt) {
@@ -134,6 +140,34 @@ function removeCard(evt) {
   evt.target.closest('.card-list__item').remove();
 }
 
+
+// функции для увеличения картинок
+
+function openPicturePopup() {
+  picturePopup.classList.add('popup-picture_opened');
+}
+
+function closePicturePopup() {
+  picturePopup.classList.remove('popup-picture_opened');
+}
+
+function zoomPicture(evt) {
+  const contentCurrent = document.querySelector('.popup-picture__content');
+  const contentNew = popupPictureTemplate.cloneNode(true);  
+  
+  const picture = contentNew.querySelector('.popup-picture__img');
+  const name = contentNew.querySelector('.popup-picture__name');
+
+  const nameText = evt.target.nextElementSibling.children[0].textContent;
+
+  picture.src = evt.target.src;
+  picture.alt = nameText;
+  name.textContent = nameText; 
+
+
+  contentCurrent.replaceWith(contentNew);
+  openPicturePopup();  
+}
 
 // привязка к событиям
 
@@ -151,3 +185,4 @@ placeAddButton.addEventListener('click',openPlacePopup);
 placePopupCloseButton.addEventListener('click',closePlacePopup);
 placeForm.addEventListener('submit',submitPlaceForm);
 
+picturePopupCloseButton.addEventListener('click',closePicturePopup);
