@@ -8,7 +8,7 @@
   <link href="pages/index.css" rel="stylesheet">
 </head>
 
-<body class="page"> 
+<body class="page">
   <!-- 
 
     Привет! Подготовил несколько комментариев :)
@@ -66,13 +66,12 @@
   </footer>
   <div class="popup popup_type_profile">
     <div class="popup__container">
-      <button class="popup__close popup__close_type_profile" title="Закрыть" aria-label="Закрыть" type="button"></button>
+      <button class="popup__close popup__close_type_profile" title="Закрыть" aria-label="Закрыть"
+        type="button"></button>
       <form action="post" class="popup__form popup__form_type_profile" name="edit-profile">
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="user-name"
-          required>
-        <input type="text" class="popup__input popup__input_type_bio" placeholder="О себе" name="user-bio"
-          required>
+        <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="user-name" required>
+        <input type="text" class="popup__input popup__input_type_bio" placeholder="О себе" name="user-bio" required>
         <button type="submit" class="popup__submit popup__submit_type_profile">Сохранить</button>
       </form>
     </div>
@@ -84,8 +83,8 @@
         <h2 class="popup__heading">Новое место</h2>
         <input type="text" class="popup__input popup__input_type_place-name" placeholder="Название" name="place-name"
           required>
-        <input type="url" class="popup__input popup__input_type_place-pic" placeholder="Ссылка на картинку" name="place-pic"
-          required>
+        <input type="url" class="popup__input popup__input_type_place-pic" placeholder="Ссылка на картинку"
+          name="place-pic" required>
         <button type="submit" class="popup__submit popup__submit_type_place">Создать</button>
       </form>
     </div>
@@ -93,17 +92,15 @@
   <div class="popup-picture">
     <div class="popup-picture__container">
       <button class="popup-picture__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
-      <div class="popup-picture__content">     
-        <img src="#" alt="Картинка-заглушка модального окна" class="popup-picture__img">
-        <p class="popup-picture__name"></p>
-      </div>
+      <img src="#" alt="Картинка-заглушка модального окна" class="popup-picture__img">
+      <p class="popup-picture__name"></p>
     </div>
   </div>
   <template class="card-template">
     <li class="card-list__item">
       <figure class="card">
         <button class="card__remove" type="button" aria-label="Удалить"></button>
-         <!-- автотесты Яндекса не пропускают пустые атрибуты src и alt-->
+        <!-- автотесты Яндекса не пропускают пустые атрибуты src и alt-->
         <img src="#" alt="Картинка-заглушка шаблона карточки" class="card__picture">
         <figcaption class="card__description">
           <h2 class="card__name"></h2>
