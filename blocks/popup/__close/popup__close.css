@@ -6,8 +6,8 @@
   padding: 0;
   border: 0;
   position: absolute;
-  right: 0;
-  top: -53px;
+  right: -32px;
+  top: -34px;
   cursor: pointer;
   transition: opacity ease .5s;
 }
