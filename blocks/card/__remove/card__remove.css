@@ -10,6 +10,7 @@
   padding: 0;
   cursor: pointer;
   transition: opacity ease .5s;
+  z-index: 1;
 }
 
 .card__remove:hover {
