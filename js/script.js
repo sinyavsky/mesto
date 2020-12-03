@@ -64,17 +64,24 @@ const picturePopupCloseButton = document.querySelector('.popup__close_type_pictu
 const popupPictureImg = document.querySelector('.popup__picture');
 const popupPictureName = document.querySelector('.popup__picture-name');
 
+
+// общие функции модальных окон
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
+
 // функции для профиля
 
 function openProfilePopup() {  
   profileNameInput.value = profileNameElement.textContent;
-  profileBioInput.value = profileBioElement.textContent;
-  
-  profilePopup.classList.add('popup_opened');
-}
-
-function closeProfilePopup() {
-  profilePopup.classList.remove('popup_opened');
+  profileBioInput.value = profileBioElement.textContent;  
+  openPopup(profilePopup);
 }
 
 function submitProfileForm(e) {
@@ -83,7 +90,7 @@ function submitProfileForm(e) {
   profileNameElement.textContent = profileNameInput.value;  
   profileBioElement.textContent = profileBioInput.value;
 
-  closeProfilePopup();
+  closePopup(profilePopup);
 }
 
 
@@ -113,7 +120,7 @@ function createCard(name, link) {
   newCardPic.alt = name;
   newCardPic.title = name;
       
-  newCardPic.addEventListener('click',zoomPicture);
+  newCardPic.addEventListener('click',openPicturePopup);
 
   newCard.querySelector('.card__like').addEventListener('click',toggleLike);
   newCard.querySelector('.card__remove').addEventListener('click',removeCard)
@@ -125,57 +132,49 @@ function addCard(container, element) {
   container.prepend(element);
 }
 
-function openPlacePopup() {      
-  placePopup.classList.add('popup_opened');
-}
-
-function closePlacePopup() {
-  placePopup.classList.remove('popup_opened');
-}
-
 function submitPlaceForm(e) {
   e.preventDefault();  
   addCard(cardsList,createCard(placeNameInput.value,placePicInput.value));
   placeForm.reset();  
-  closePlacePopup();
+  closePopup(placePopup);
 }
 
 
 // функции для увеличения картинок
 
-function openPicturePopup() {
-  picturePopup.classList.add('popup_opened');
-}
-
-function closePicturePopup() {
-  picturePopup.classList.remove('popup_opened');
-}
-
-function zoomPicture(evt) {
+function openPicturePopup(evt) {
   const name = evt.target.nextElementSibling.children[0].textContent;
 
   popupPictureImg.src = evt.target.src;
   popupPictureImg.alt = name;
   popupPictureName.textContent = name; 
 
-  openPicturePopup();  
+  openPopup(picturePopup);  
 }
 
 
 // привязка к событиям
 
-document.addEventListener('DOMContentLoaded',() => {  // демонстрация, что я освоил стрелочные функции :)  
+document.addEventListener('DOMContentLoaded',() => {  
   initialCards.forEach((item) => {
       addCard(cardsList,createCard(item.name,item.link));      
     });
 });
 
 profileEditButton.addEventListener('click',openProfilePopup);
-profilePopupCloseButton.addEventListener('click',closeProfilePopup);
+profilePopupCloseButton.addEventListener('click', () =>  {
+  closePopup(profilePopup);
+});
 profileForm.addEventListener('submit',submitProfileForm);
 
-placeAddButton.addEventListener('click',openPlacePopup);
-placePopupCloseButton.addEventListener('click',closePlacePopup);
+placeAddButton.addEventListener('click',() => {
+  openPopup(placePopup);
+});
+placePopupCloseButton.addEventListener('click',() => {
+  closePopup(placePopup);
+});
 placeForm.addEventListener('submit',submitPlaceForm);
 
-picturePopupCloseButton.addEventListener('click',closePicturePopup);
+picturePopupCloseButton.addEventListener('click',() => {
+  closePopup(picturePopup);
+});
