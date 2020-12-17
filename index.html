@@ -47,16 +47,22 @@
   </footer>
   <div class="popup popup_type_profile">
     <div class="popup__container popup__container_type_form">
-      <button class="popup__close" title="Закрыть" aria-label="Закрыть"
-        type="button"></button>
+      <button class="popup__close" title="Закрыть" aria-label="Закрыть" type="button"></button>
       <div class="popup__content">
         <form action="post" class="popup__form popup__form_type_profile" name="edit-profile">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="user-name" required>
-          <input type="text" class="popup__input popup__input_type_bio" placeholder="О себе" name="user-bio" required>
+          <label class="popup__label">
+            <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="user-name" required>
+            <span class="popup__error"></span>
+          </label>
+          <label class="popup__label">
+            <input type="text" class="popup__input popup__input_type_bio" placeholder="О себе" name="user-bio" required>
+            <span class="popup__error"></span>
+          </label>
+
           <button type="submit" class="popup__submit popup__submit_type_profile">Сохранить</button>
         </form>
-      </div>        
+      </div>
     </div>
   </div>
   <div class="popup popup_type_place">
@@ -65,13 +71,19 @@
       <div class="popup__content">
         <form action="post" class="popup__form popup__form_type_place" name="add-place">
           <h2 class="popup__heading">Новое место</h2>
-          <input type="text" class="popup__input popup__input_type_place-name" placeholder="Название" name="place-name"
-            required>
-          <input type="url" class="popup__input popup__input_type_place-pic" placeholder="Ссылка на картинку"
-            name="place-pic" required>
+          <label class="popup__label">
+            <input type="text" class="popup__input popup__input_type_place-name" placeholder="Название"
+              name="place-name" required>
+            <span class="popup__error"></span>
+          </label>
+          <label class="popup__label">
+            <input type="url" class="popup__input popup__input_type_place-pic" placeholder="Ссылка на картинку"
+              name="place-pic" required>
+            <span class="popup__error"></span>
+          </label>
           <button type="submit" class="popup__submit popup__submit_type_place">Создать</button>
         </form>
-      </div>      
+      </div>
     </div>
   </div>
   <div class="popup popup_type_picture">
@@ -80,7 +92,7 @@
       <div class="popup__content">
         <img src="#" alt="Картинка-заглушка модального окна" class="popup__picture">
         <p class="popup__picture-name"></p>
-      </div>      
+      </div>
     </div>
   </div>
   <template class="card-template">
