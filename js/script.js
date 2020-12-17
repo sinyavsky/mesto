@@ -27,13 +27,15 @@ const initialCards = [
   }
 ]; 
 
+// все модальные окна
+
+const popups = document.querySelectorAll('.popup');
 
 // объекты для редактирования профиля
 
 const profileEditButton = document.querySelector('.profile__edit');
 const profilePopup = document.querySelector('.popup_type_profile');
 const profileForm = document.querySelector('.popup__form_type_profile');
-const profilePopupCloseButton = document.querySelector('.popup__close_type_profile');
 
 const profileNameElement = document.querySelector('.profile__name');
 const profileNameInput = document.querySelector('.popup__input_type_name');
@@ -47,7 +49,6 @@ const profileBioInput = document.querySelector('.popup__input_type_bio');
 const placeAddButton = document.querySelector('.profile__add');
 const placePopup = document.querySelector('.popup_type_place');
 const placeForm = document.querySelector('.popup__form_type_place');
-const placePopupCloseButton = document.querySelector('.popup__close_type_place');
 
 const placeNameInput = document.querySelector('.popup__input_type_place-name');
 const placePicInput = document.querySelector('.popup__input_type_place-pic');
@@ -59,7 +60,6 @@ const cardsList = document.querySelector('.cards__list');
 // объекты для увеличения картинок
 
 const picturePopup = document.querySelector('.popup_type_picture');
-const picturePopupCloseButton = document.querySelector('.popup__close_type_picture');
 
 const popupPictureImg = document.querySelector('.popup__picture');
 const popupPictureName = document.querySelector('.popup__picture-name');
@@ -162,19 +162,19 @@ document.addEventListener('DOMContentLoaded',() => {
 });
 
 profileEditButton.addEventListener('click',openProfilePopup);
-profilePopupCloseButton.addEventListener('click', () =>  {
-  closePopup(profilePopup);
-});
+
 profileForm.addEventListener('submit',submitProfileForm);
 
 placeAddButton.addEventListener('click',() => {
   openPopup(placePopup);
 });
-placePopupCloseButton.addEventListener('click',() => {
-  closePopup(placePopup);
-});
+
 placeForm.addEventListener('submit',submitPlaceForm);
 
-picturePopupCloseButton.addEventListener('click',() => {
-  closePopup(picturePopup);
+// закрытие модальных окон при клике на оверлей или кнопку закрытия
+popups.forEach((item) => {
+  item.addEventListener('click', function (evt) {
+    if(evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close'))
+      closePopup(this);
+  });
 });
