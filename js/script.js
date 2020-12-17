@@ -65,14 +65,23 @@ const popupPictureImg = document.querySelector('.popup__picture');
 const popupPictureName = document.querySelector('.popup__picture-name');
 
 
+
 // общие функции модальных окон
 
+function listenEscapeKey(evt) {
+  if(evt.key === 'Escape')
+    closePopup();
+}
+
 function openPopup(popup) {
+  document.addEventListener('keydown', listenEscapeKey);
   popup.classList.add('popup_opened');
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+function closePopup() {  
+  currentPopup = document.querySelector('.popup_opened');
+  document.removeEventListener('keydown', listenEscapeKey);
+  currentPopup.classList.remove('popup_opened');
 }
 
 
@@ -90,7 +99,7 @@ function submitProfileForm(e) {
   profileNameElement.textContent = profileNameInput.value;  
   profileBioElement.textContent = profileBioInput.value;
 
-  closePopup(profilePopup);
+  closePopup();
 }
 
 
@@ -136,7 +145,7 @@ function submitPlaceForm(e) {
   e.preventDefault();  
   addCard(cardsList,createCard(placeNameInput.value,placePicInput.value));
   placeForm.reset();  
-  closePopup(placePopup);
+  closePopup();
 }
 
 
@@ -175,6 +184,6 @@ placeForm.addEventListener('submit',submitPlaceForm);
 popups.forEach((item) => {
   item.addEventListener('click', function (evt) {
     if(evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close'))
-      closePopup(this);
+      closePopup();
   });
 });
