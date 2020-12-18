@@ -9,5 +9,6 @@
   left: 0;
   visibility: hidden;
   opacity: 0;
+  cursor: pointer;
   transition: visibility .3s, opacity .3s linear;
 }
