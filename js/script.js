@@ -52,6 +52,7 @@ const placeForm = document.querySelector('.popup__form_type_place');
 
 const placeNameInput = document.querySelector('.popup__input_type_place-name');
 const placePicInput = document.querySelector('.popup__input_type_place-pic');
+const placeSubmitButton = document.querySelector('.popup__submit_type_place');
 
 const cardTemplate = document.querySelector('.card-template').content;
 const cardsList = document.querySelector('.cards__list');
@@ -160,7 +161,9 @@ function addCard(container, element) {
 
 function submitPlaceForm(e) {
   addCard(cardsList,createCard(placeNameInput.value,placePicInput.value));
-  placeForm.reset();  
+  placeForm.reset();
+  // поля очистили, теперь надо обновить статус кнопки 
+  toggleSubmitButton(placeSubmitButton, [placeNameInput, placePicInput], 'popup__submit_disabled'); 
   closePopup();
 }
 
