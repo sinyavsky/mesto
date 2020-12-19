@@ -15,28 +15,28 @@ function toggleSubmitButton(buttonItem, inputsList, inactiveButtonClass) {
   }
 }
 
-function showValidityError(formItem, inputItem, errorText, settings) {
-  inputItem.classList.add(settings.inputErrorClass);
+function showValidityError(formItem, inputItem, errorText, inputErrorClass, errorClass) {
+  inputItem.classList.add(inputErrorClass);
 
   const errorItem = formItem.querySelector(`.${inputItem.id}-error`);
-  errorItem.classList.add(settings.errorClass);
+  errorItem.classList.add(errorClass);
   errorItem.textContent = errorText;
 }
 
-function hideValidityError(formItem, inputItem, settings) {
-  inputItem.classList.remove(settings.inputErrorClass);
+function hideValidityError(formItem, inputItem, inputErrorClass, errorClass) {
+  inputItem.classList.remove(inputErrorClass);
 
   const errorItem = formItem.querySelector(`.${inputItem.id}-error`);
-  errorItem.classList.remove(settings.errorClass);
+  errorItem.classList.remove(errorClass);
   errorItem.textContent = '';
 }  
 
-function checkValidity(formItem, inputItem, settings) {
+function checkValidity(formItem, inputItem, inputErrorClass, errorClass) {
   if(inputItem.validity.valid) {
-    hideValidityError(formItem, inputItem, settings);
+    hideValidityError(formItem, inputItem, inputErrorClass, errorClass);
   }
   else {
-    showValidityError(formItem, inputItem, inputItem.validationMessage, settings);
+    showValidityError(formItem, inputItem, inputItem.validationMessage, inputErrorClass, errorClass);
   }
 }   
 
@@ -45,9 +45,12 @@ function setEventListeners(formsList, settings) {
     const inputsList = Array.from(formItem.querySelectorAll(settings.inputSelector));
     const buttonItem = formItem.querySelector(settings.submitButtonSelector);
     toggleSubmitButton(buttonItem, inputsList, settings.inactiveButtonClass);
+
     inputsList.forEach(function (inputItem) {
       inputItem.addEventListener('input', function () {
-        checkValidity(formItem, inputItem, settings);
+        // сначала хотел вместо последних двух аргументов передать один объект settings,
+        // но подумал, что 2 аргумента не так уж много и нагляднее передать их раздельно
+        checkValidity(formItem, inputItem, settings.inputErrorClass, settings.errorClass);
         toggleSubmitButton(buttonItem, inputsList, settings.inactiveButtonClass);
       });        
     });
@@ -57,6 +60,9 @@ function setEventListeners(formsList, settings) {
 function enableValidation(settings) {
 
   const formsList = Array.from(document.querySelectorAll(settings.formSelector));
+
+  // селектор формы больше не нужен
+  delete settings.formSelector;
 
   formsList.forEach((formItem) => {
     formItem.addEventListener('submit', (evt) => {
