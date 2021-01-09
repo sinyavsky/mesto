@@ -23,22 +23,22 @@ export default class Card {
 
   _createCardElement = () => {
     this._card = document.querySelector(this._templateSelector).content.cloneNode(true);   
-    const newCardName = this._card.querySelector(this._nameSelector);
-    const newCardPic = this._card.querySelector(this._pictureSelector);
+    const cardName = this._card.querySelector(this._nameSelector);
+    const cardPic = this._card.querySelector(this._pictureSelector);
   
     // длинные названия не поместятся, поэтому утанавливаем и title
-    newCardName.textContent = this._name;
-    newCardName.title = this._name;
+    cardName.textContent = this._name;
+    cardName.title = this._name;
   
-    newCardPic.src = this._pictureSrc;
-    newCardPic.alt = this._name;
-    newCardPic.title = this._name;
+    cardPic.src = this._pictureSrc;
+    cardPic.alt = this._name;
+    cardPic.title = this._name;
   }  
 
   _setEventListeners = () => {
-    const newCardPic = this._card.querySelector(this._pictureSelector);
+    const cardPic = this._card.querySelector(this._pictureSelector);
 
-    newCardPic.addEventListener('click', this._popupHandler);
+    cardPic.addEventListener('click', this._popupHandler);
   
     this._card.querySelector(this._likeSelector).addEventListener('click', this._toggleLike);
     this._card.querySelector(this._removeSelector).addEventListener('click', this._removeCard)
