@@ -167,19 +167,13 @@ function openPicturePopup(evt) {
 
 // привязка к событиям
 
-document.addEventListener('DOMContentLoaded',() => {  
-  initialCards.forEach((item) => {
-    addCard(item.name, item.link); 
-    });
+document.addEventListener('DOMContentLoaded',() => {
+  initialCards.forEach((item) => addCard(item.name, item.link)); 
 });
 
-profileEditButton.addEventListener('click',openProfilePopup);
-
-profileForm.addEventListener('submit',submitProfileForm);
-
-placeAddButton.addEventListener('click',() => {
-  openPopup(placePopup);
-});
+profileEditButton.addEventListener('click', openProfilePopup);
+profileForm.addEventListener('submit', submitProfileForm);
+placeAddButton.addEventListener('click', () => openPopup(placePopup));
 
 placeForm.addEventListener('submit',submitPlaceForm);
 
