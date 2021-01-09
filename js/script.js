@@ -1,3 +1,5 @@
+import FormValidator from './FormValidator.js';
+
 // стартовый набор карточек
 
 const initialCards = [
@@ -78,7 +80,7 @@ function openPopup(popup) {
 }
 
 function closePopup() {  
-  currentPopup = document.querySelector('.popup_opened');
+  const currentPopup = document.querySelector('.popup_opened');
   document.removeEventListener('keydown', listenEscapeKey);
   currentPopup.classList.remove('popup_opened');
 }
@@ -90,19 +92,20 @@ function prepareProfileForm() {
   profileNameInput.value = profileNameElement.textContent;
   profileBioInput.value = profileBioElement.textContent; 
 
-  // т.к. событие input не срабатывает при программном изменении поля
-  toggleSubmitButton(profileSubmitButton, [profileNameInput, profileBioInput], 'popup__submit_disabled');
+  // событие input не срабатывает при программном изменении поля, а кнопка должна стать активной
+  profileSubmitButton.disabled = false;
+  profileSubmitButton.classList.remove('popup__submit_disabled');
 
   // если мы удалили значения инпутов и закрыли поле,
   // то при повторном открытии будут отображаться ошибки  
   // поэтому скрываем ошибки
-  errorsElements = Array.from(profileForm.querySelectorAll('.popup__error'));
+  const errorsElements = Array.from(profileForm.querySelectorAll('.popup__error'));
   errorsElements.forEach((errorItem) => {
     errorItem.classList.remove('popup__error_visible');
   });
 
   // и убираем классы ошибок у инпутов
-  inputElements = Array.from(profileForm.querySelectorAll('.popup__input'));
+  const inputElements = Array.from(profileForm.querySelectorAll('.popup__input'));
   inputElements.forEach((inputItem) => {
     inputItem.classList.remove('popup__input_type_error');
   });
@@ -163,7 +166,8 @@ function submitPlaceForm(e) {
   addCard(cardsList,createCard(placeNameInput.value,placePicInput.value));
   placeForm.reset();
   // поля очистили, теперь надо обновить статус кнопки 
-  toggleSubmitButton(placeSubmitButton, [placeNameInput, placePicInput], 'popup__submit_disabled'); 
+  placeSubmitButton.disabled = false;
+  placeSubmitButton.classList.add('popup__submit_disabled');
   closePopup();
 }
 
@@ -209,11 +213,15 @@ popups.forEach((item) => {
 
 // инициализация валидации
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}); 
+document.querySelectorAll('.popup__form').forEach((formElement) => {
+  const formValidator = new FormValidator({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  },
+  formElement);
+  formValidator.enableValidation();
+});
