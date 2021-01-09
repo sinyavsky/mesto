@@ -1,3 +1,4 @@
+import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
 // стартовый набор карточек
@@ -56,7 +57,6 @@ const placeNameInput = document.querySelector('.popup__input_type_place-name');
 const placePicInput = document.querySelector('.popup__input_type_place-pic');
 const placeSubmitButton = document.querySelector('.popup__submit_type_place');
 
-const cardTemplate = document.querySelector('.card-template').content;
 const cardsList = document.querySelector('.cards__list');
 
 // объекты для увеличения картинок
@@ -126,44 +126,24 @@ function submitProfileForm(e) {
 
 // функции для взаимодействия с карточками
 
-function toggleLike(evt) {
-  evt.target.classList.toggle('card__like_active');
-}
-
-function removeCard(evt) {
-  evt.target.closest('.card-list__item').remove();
-}
-
-
-// функции для добавления карточек
-
-function createCard(name, link) {
-  const newCard = cardTemplate.cloneNode(true);   
-  const newCardName = newCard.querySelector('.card__name');
-  const newCardPic = newCard.querySelector('.card__picture');
-
-  // длинные названия не поместятся, поэтому утанавливаем и title
-  newCardName.textContent = name;
-  newCardName.title = name;
-
-  newCardPic.src = link;
-  newCardPic.alt = name;
-  newCardPic.title = name;
-      
-  newCardPic.addEventListener('click',openPicturePopup);
-
-  newCard.querySelector('.card__like').addEventListener('click',toggleLike);
-  newCard.querySelector('.card__remove').addEventListener('click',removeCard)
-  
-  return newCard;  
-}
-
-function addCard(container, element) {
-  container.prepend(element);
+function addCard(name, pictureSrc) {
+  const card = new Card({
+    name: name, 
+    pictureSrc: pictureSrc,
+    templateSelector: '.card-template',
+    cardSelector: '.card-list__item',
+    nameSelector: '.card__name',
+    pictureSelector: '.card__picture',
+    likeSelector: '.card__like',
+    removeSelector: '.card__remove',    
+    likeActiveClass: 'card__like_active',    
+    popupHandler: openPicturePopup
+  });  
+  cardsList.prepend(card.createCard());
 }
 
 function submitPlaceForm(e) {
-  addCard(cardsList,createCard(placeNameInput.value,placePicInput.value));
+  addCard(placeNameInput.value, placePicInput.value);
   placeForm.reset();
   // поля очистили, теперь надо обновить статус кнопки 
   placeSubmitButton.disabled = false;
@@ -189,7 +169,7 @@ function openPicturePopup(evt) {
 
 document.addEventListener('DOMContentLoaded',() => {  
   initialCards.forEach((item) => {
-      addCard(cardsList,createCard(item.name,item.link));      
+    addCard(item.name, item.link); 
     });
 });
 
