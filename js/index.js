@@ -92,23 +92,7 @@ function prepareProfileForm() {
   profileNameInput.value = profileNameElement.textContent;
   profileBioInput.value = profileBioElement.textContent; 
 
-  // событие input не срабатывает при программном изменении поля, а кнопка должна стать активной
-  profileSubmitButton.disabled = false;
-  profileSubmitButton.classList.remove('popup__submit_disabled');
-
-  // если мы удалили значения инпутов и закрыли поле,
-  // то при повторном открытии будут отображаться ошибки  
-  // поэтому скрываем ошибки
-  const errorsElements = Array.from(profileForm.querySelectorAll('.popup__error'));
-  errorsElements.forEach((errorItem) => {
-    errorItem.classList.remove('popup__error_visible');
-  });
-
-  // и убираем классы ошибок у инпутов
-  const inputElements = Array.from(profileForm.querySelectorAll('.popup__input'));
-  inputElements.forEach((inputItem) => {
-    inputItem.classList.remove('popup__input_type_error');
-  });
+  profileValidator.resetValidation();
 }
 
 function openProfilePopup() {  
@@ -145,9 +129,7 @@ function addCard(name, pictureSrc) {
 function submitPlaceForm(e) {
   addCard(placeNameInput.value, placePicInput.value);
   placeForm.reset();
-  // поля очистили, теперь надо обновить статус кнопки 
-  placeSubmitButton.disabled = false;
-  placeSubmitButton.classList.add('popup__submit_disabled');
+  addPlaceValidator.resetValidation();
   closePopup();
 }
 
@@ -185,15 +167,16 @@ popups.forEach((item) => {
 
 // инициализация валидации
 
-document.querySelectorAll('.popup__form').forEach((formElement) => {
-  const formValidator = new FormValidator({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  },
-  formElement);
-  formValidator.enableValidation();
-});
+const validationConfig = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+const profileValidator = new FormValidator(validationConfig, profileForm);
+profileValidator.enableValidation();
+
+const addPlaceValidator = new FormValidator(validationConfig, placeForm);
+addPlaceValidator.enableValidation();
