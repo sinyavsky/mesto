@@ -110,7 +110,7 @@ function submitProfileForm(e) {
 
 // функции для взаимодействия с карточками
 
-function addCard(name, pictureSrc) {
+function createItem(name, pictureSrc) {
   const card = new Card({
     name: name, 
     pictureSrc: pictureSrc,
@@ -123,7 +123,13 @@ function addCard(name, pictureSrc) {
     likeActiveClass: 'card__like_active',    
     popupHandler: openPicturePopup
   });  
-  cardsList.prepend(card.createCard());
+
+  return card.createCard();
+}
+
+function addCard(name, pictureSrc) {
+  const card = createItem(name, pictureSrc);
+  cardsList.prepend(card);
 }
 
 function submitPlaceForm(e) {
