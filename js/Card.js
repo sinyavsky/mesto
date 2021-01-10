@@ -36,7 +36,7 @@ export default class Card {
   }  
 
   _setEventListeners = () => {
-    this._card.querySelector(this._pictureSelector).addEventListener('click', this._popupHandler);  
+    this._card.querySelector(this._pictureSelector).addEventListener('click', () => this._popupHandler(this._name, this._pictureSrc));  
     this._card.querySelector(this._likeSelector).addEventListener('click', this._toggleLike);
     this._card.querySelector(this._removeSelector).addEventListener('click', this._removeCard)
   }

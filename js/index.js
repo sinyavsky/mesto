@@ -154,10 +154,8 @@ function submitPlaceForm(e) {
 
 // функции для увеличения картинок
 
-function openPicturePopup(evt) {
-  const name = evt.target.nextElementSibling.children[0].textContent;
-
-  popupPictureImg.src = evt.target.src;
+function openPicturePopup(name, link) {
+  popupPictureImg.src = link;
   popupPictureImg.alt = name;
   popupPictureName.textContent = name; 
 
