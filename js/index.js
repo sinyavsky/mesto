@@ -152,7 +152,6 @@ const cardsList = new Section({items: initialCards, renderer: (item) => {
 
 document.addEventListener('DOMContentLoaded', () => {   
   cardsList.renderElements();
-  ; 
 });
 
 profileEditButton.addEventListener('click', openProfilePopup);
