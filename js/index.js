@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
+import Popup from './Popup.js';
 
 // стартовый набор карточек
 
@@ -62,25 +63,6 @@ const picturePopup = document.querySelector('.popup_type_picture');
 
 const popupPictureImg = document.querySelector('.popup__picture');
 const popupPictureName = document.querySelector('.popup__picture-name');
-
-
-// общие функции модальных окон
-
-function listenEscapeKey(evt) {
-  if(evt.key === 'Escape')
-    closePopup();
-}
-
-function openPopup(popup) {
-  document.addEventListener('keydown', listenEscapeKey);
-  popup.classList.add('popup_opened');
-}
-
-function closePopup() {  
-  const currentPopup = document.querySelector('.popup_opened');
-  document.removeEventListener('keydown', listenEscapeKey);
-  currentPopup.classList.remove('popup_opened');
-}
 
 
 // функции для профиля
