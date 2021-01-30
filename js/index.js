@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
 // стартовый набор карточек
 
@@ -45,7 +46,6 @@ const profileNameInput = document.querySelector('.popup__input_type_name');
 
 const profileBioElement = document.querySelector('.profile__bio');
 const profileBioInput = document.querySelector('.popup__input_type_bio');
-const profileSubmitButton = document.querySelector('.popup__submit_type_profile');
 
 // объекты для добавления карточек
 
@@ -55,9 +55,6 @@ const placeForm = document.querySelector('.popup__form_type_place');
 
 const placeNameInput = document.querySelector('.popup__input_type_place-name');
 const placePicInput = document.querySelector('.popup__input_type_place-pic');
-const placeSubmitButton = document.querySelector('.popup__submit_type_place');
-
-const cardsList = document.querySelector('.cards__list');
 
 // объекты для увеличения картинок
 
@@ -127,13 +124,8 @@ function createItem(name, pictureSrc) {
   return card.createCard();
 }
 
-function addCard(name, pictureSrc) {
-  const card = createItem(name, pictureSrc);
-  cardsList.prepend(card);
-}
-
 function submitPlaceForm(e) {
-  addCard(placeNameInput.value, placePicInput.value);
+  cardsList.addItem(createItem(placeNameInput.value, placePicInput.value))
   placeForm.reset();
   addPlaceValidator.resetValidation();
   closePopup();
@@ -153,8 +145,14 @@ function openPicturePopup(name, link) {
 
 // привязка к событиям
 
-document.addEventListener('DOMContentLoaded',() => {
-  initialCards.forEach((item) => addCard(item.name, item.link)); 
+const cardsList = new Section({items: initialCards, renderer: (item) => {
+    cardsList.addItem(createItem(item.name, item.link));
+  }
+}, '.cards__list');
+
+document.addEventListener('DOMContentLoaded', () => {   
+  cardsList.renderElements();
+  ; 
 });
 
 profileEditButton.addEventListener('click', openProfilePopup);
