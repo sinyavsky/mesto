@@ -1,27 +1,34 @@
+import gates from '../images/most-zolotye-vorota.jpg';
+import karpatos from '../images/karpatos.jpg';
+import berlin from '../images/berlinskiy-kafedralnyy-sobor.jpg';
+import square from '../images/krasnaya-ploshad.jpg';
+import japur from '../images/dzhaypur.jpg';
+import france from '../images/eyfeleva-bashnya.jpg';
+
 export const initialCards = [
   {
     name: 'Мост Золотые Ворота',
-    link: 'images/most-zolotye-vorota.jpg'
+    link: gates
   },
   {
     name: 'Карпатос',
-    link: 'images/karpatos.jpg'
+    link: karpatos
   },
   {
     name: 'Берлинский Кафедральный Собор',
-    link: 'images/berlinskiy-kafedralnyy-sobor.jpg'
+    link: berlin
   },
   {
     name: 'Красная Площадь',
-    link: 'images/krasnaya-ploshad.jpg'
+    link: square
   },
   {
     name: 'Джайпур',
-    link: 'images/dzhaypur.jpg'
+    link: japur
   },
   {
     name: 'Эйфелева Башня',
-    link: 'images/eyfeleva-bashnya.jpg'
+    link: france
   }
 ]; 
 

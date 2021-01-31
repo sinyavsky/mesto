@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Приложение Mesto</title>
-  <link href="pages/index.css" rel="stylesheet">
 </head>
 
 <body class="page">
@@ -18,13 +17,13 @@
   <header class="header">
     <!-- автотесты Яндекса не пропускают эту строчку без атрибута target -->
     <a href="index.html" target="_self">
-      <img src="images/logo.svg" alt="Место" class="header__logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="Место" class="header__logo">
     </a>
   </header>
   <main class="page__container">
     <section class="profile">
       <div class="profile__user">
-        <img src="images/avatar.jpg" alt="Жак-Ив Кусто - фото профиля" class="profile__ava">
+        <img src="<%=require('./images/avatar.jpg')%>" alt="Жак-Ив Кусто - фото профиля" class="profile__ava">
         <div class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -107,14 +106,6 @@
       </figure>
     </li>
   </template>
-  <script src="./utils/constants.js" type="module"></script>
-  <script src="./components/FormValidator.js" type="module"></script>
-  <script src="./components/Card.js" type="module"></script>
-  <script src="./components/Section.js" type="module"></script>
-  <script src="./components/Popup.js" type="module"></script>
-  <script src="./components/PopupWithImage.js" type="module"></script>
-  <script src="./components/PopupWithForm.js" type="module"></script>
-  <script src="./pages/index.js" type="module"></script>
 </body>
 
 </html>
