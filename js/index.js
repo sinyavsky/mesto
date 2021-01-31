@@ -3,6 +3,7 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 // стартовый набор карточек
 
@@ -72,11 +73,11 @@ const placeFormPopup = new PopupWithForm('.popup_type_place', (formData) => {
 });
 placeFormPopup.setEventListeners();
 
+const userInfo = new UserInfo({nameSel: '.profile__name', bioSel: '.profile__bio'});
 
 const profileFormPopup = new PopupWithForm('.popup_type_profile', (formData) => {
   console.log(formData);
-  profileNameElement.textContent = formData.user_name;  
-  profileBioElement.textContent = formData.user_bio;  
+  userInfo.setUserInfo({name: formData.user_name, bio: formData.user_bio});  
   profileFormPopup.close();
   profileValidator.resetValidation();
 });
@@ -87,33 +88,10 @@ profileFormPopup.setEventListeners();
 // объекты для редактирования профиля
 
 const profileEditButton = document.querySelector('.profile__edit');
-const profilePopup = document.querySelector('.popup_type_profile');
-
-
-const profileNameElement = document.querySelector('.profile__name');
-const profileNameInput = document.querySelector('.popup__input_type_name');
-
-const profileBioElement = document.querySelector('.profile__bio');
-const profileBioInput = document.querySelector('.popup__input_type_bio');
 
 // объекты для добавления карточек
 
 const placeAddButton = document.querySelector('.profile__add');
-const placePopup = document.querySelector('.popup_type_place');
-
-
-const placeNameInput = document.querySelector('.popup__input_type_place-name');
-const placePicInput = document.querySelector('.popup__input_type_place-pic');
-
-
-// функции для профиля
-
-function prepareProfileForm() {
-  profileNameInput.value = profileNameElement.textContent;
-  profileBioInput.value = profileBioElement.textContent; 
-
-  profileValidator.resetValidation();
-}
 
 
 // функции для взаимодействия с карточками
@@ -139,7 +117,13 @@ function createItem(name, pictureSrc) {
 
 
 
-profileEditButton.addEventListener('click', () => profileFormPopup.open());
+profileEditButton.addEventListener('click', () => {
+  const user = userInfo.getUserInfo();
+  document.querySelector('.popup__input_type_name').value = user.name;
+  document.querySelector('.popup__input_type_bio').value = user.bio;
+  profileValidator.resetValidation();
+  profileFormPopup.open();
+});
 placeAddButton.addEventListener('click', () => placeFormPopup.open());
 
 
