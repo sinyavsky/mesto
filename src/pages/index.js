@@ -2,7 +2,8 @@ import './index.css';
 
 import {
   initialCards,
-  validationConfig
+  validationConfig,
+  cardDefaultSettings
 } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
@@ -30,16 +31,12 @@ const cardsList = new Section({
   items: initialCards, 
   renderer: item => cardsList.addItem(
     new Card({
-      name: item.name, 
-      pictureSrc: item.link,
-      templateSelector: '.card-template',
-      cardSelector: '.card-list__item',
-      nameSelector: '.card__name',
-      pictureSelector: '.card__picture',
-      likeSelector: '.card__like',
-      removeSelector: '.card__remove',    
-      likeActiveClass: 'card__like_active',    
-      handleCardClick: popupWithImage.open.bind(popupWithImage)
+      ... cardDefaultSettings,
+      ... {
+        name: item.name, 
+        pictureSrc: item.link,         
+        handleCardClick: popupWithImage.open.bind(popupWithImage)
+      }      
     }).createCard())
 }, '.cards__list');
 
@@ -54,16 +51,12 @@ popupWithImage.setEventListeners();
 // попап с формой добавления карточек
 const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
   cardsList.addItem(new Card({
-    name: formData.place_name, 
-    pictureSrc: formData.place_pic,
-    templateSelector: '.card-template',
-    cardSelector: '.card-list__item',
-    nameSelector: '.card__name',
-    pictureSelector: '.card__picture',
-    likeSelector: '.card__like',
-    removeSelector: '.card__remove',    
-    likeActiveClass: 'card__like_active',    
-    handleCardClick: popupWithImage.open.bind(popupWithImage)
+    ... cardDefaultSettings,
+    ... {
+      name: formData.place_name, 
+      pictureSrc: formData.place_pic,       
+      handleCardClick: popupWithImage.open.bind(popupWithImage)
+    }
   }).createCard());    
   popupWithPlaceForm.close();
   addPlaceValidator.resetValidation();
