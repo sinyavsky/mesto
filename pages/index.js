@@ -40,7 +40,6 @@ const cardsList = new Section({
       handleCardClick: popupWithImage.open.bind(popupWithImage)
     }).createCard())
 }, '.cards__list');
-
 document.addEventListener('DOMContentLoaded', () => cardsList.renderElements());
 
 
