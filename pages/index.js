@@ -37,7 +37,7 @@ const cardsList = new Section({
       likeSelector: '.card__like',
       removeSelector: '.card__remove',    
       likeActiveClass: 'card__like_active',    
-      popupHandler: popupWithImage.open.bind(popupWithImage)
+      handleCardClick: popupWithImage.open.bind(popupWithImage)
     }).createCard())
 }, '.cards__list');
 
@@ -61,7 +61,7 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
     likeSelector: '.card__like',
     removeSelector: '.card__remove',    
     likeActiveClass: 'card__like_active',    
-    popupHandler: popupWithImage.open.bind(popupWithImage)
+    handleCardClick: popupWithImage.open.bind(popupWithImage)
   }).createCard());    
   popupWithPlaceForm.close();
   addPlaceValidator.resetValidation();
