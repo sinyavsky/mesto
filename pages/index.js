@@ -11,23 +11,6 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
 
-// функция, которая генерирует карточки
-const createItem = (name, pictureSrc) => {
-  return new Card({
-    name: name, 
-    pictureSrc: pictureSrc,
-    templateSelector: '.card-template',
-    cardSelector: '.card-list__item',
-    nameSelector: '.card__name',
-    pictureSelector: '.card__picture',
-    likeSelector: '.card__like',
-    removeSelector: '.card__remove',    
-    likeActiveClass: 'card__like_active',    
-    popupHandler: popupWithImage.open.bind(popupWithImage)
-  }).createCard();  
-}
-
-
 // информация о пользователе
 const user = new UserInfo({nameSel: '.profile__name', bioSel: '.profile__bio'});
 
@@ -43,7 +26,19 @@ addPlaceValidator.enableValidation();
 // рендер карточек
 const cardsList = new Section({
   items: initialCards, 
-  renderer: item => cardsList.addItem(createItem(item.name, item.link))
+  renderer: item => cardsList.addItem(
+    new Card({
+      name: item.name, 
+      pictureSrc: item.link,
+      templateSelector: '.card-template',
+      cardSelector: '.card-list__item',
+      nameSelector: '.card__name',
+      pictureSelector: '.card__picture',
+      likeSelector: '.card__like',
+      removeSelector: '.card__remove',    
+      likeActiveClass: 'card__like_active',    
+      popupHandler: popupWithImage.open.bind(popupWithImage)
+    }).createCard())
 }, '.cards__list');
 
 document.addEventListener('DOMContentLoaded', () => cardsList.renderElements());
@@ -56,7 +51,18 @@ popupWithImage.setEventListeners();
 
 // попап с формой добавления карточек
 const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
-  cardsList.addItem(createItem(formData.place_name, formData.place_pic));    
+  cardsList.addItem(new Card({
+    name: formData.place_name, 
+    pictureSrc: formData.place_pic,
+    templateSelector: '.card-template',
+    cardSelector: '.card-list__item',
+    nameSelector: '.card__name',
+    pictureSelector: '.card__picture',
+    likeSelector: '.card__like',
+    removeSelector: '.card__remove',    
+    likeActiveClass: 'card__like_active',    
+    popupHandler: popupWithImage.open.bind(popupWithImage)
+  }).createCard());    
   popupWithPlaceForm.close();
   addPlaceValidator.resetValidation();
 });
