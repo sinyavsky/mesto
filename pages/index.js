@@ -40,6 +40,7 @@ const cardsList = new Section({
       handleCardClick: popupWithImage.open.bind(popupWithImage)
     }).createCard())
 }, '.cards__list');
+
 document.addEventListener('DOMContentLoaded', () => cardsList.renderElements());
 
 
@@ -65,6 +66,7 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
   popupWithPlaceForm.close();
   addPlaceValidator.resetValidation();
 });
+
 popupWithPlaceForm.setEventListeners();
 
 
@@ -74,6 +76,7 @@ const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData =
   popupWithProfileForm.close();
   profileValidator.resetValidation();
 });
+
 popupWithProfileForm.setEventListeners();
 
 
