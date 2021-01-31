@@ -10,7 +10,7 @@ export default class Card {
     this._likeSelector = settings.likeSelector;
     this._removeSelector = settings.removeSelector;
     this._likeActiveClass = settings.likeActiveClass;
-    this._popupHandler = settings.popupHandler;    
+    this._handleCardClick = settings.handleCardClick;    
   }
 
   _toggleLike = (evt) => {
@@ -36,7 +36,7 @@ export default class Card {
   }  
 
   _setEventListeners = () => {
-    this._card.querySelector(this._pictureSelector).addEventListener('click', () => this._popupHandler(this._name, this._pictureSrc));  
+    this._card.querySelector(this._pictureSelector).addEventListener('click', () => this._handleCardClick(this._name, this._pictureSrc));  
     this._card.querySelector(this._likeSelector).addEventListener('click', this._toggleLike);
     this._card.querySelector(this._removeSelector).addEventListener('click', this._removeCard)
   }
