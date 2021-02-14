@@ -82,15 +82,26 @@ popupWithImage.setEventListeners();
 
 // попап с формой добавления карточек
 const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
-  cardsList.addItem(
-    createCard({
+  api.postCard({
       name: formData.place_name, 
-      pictureSrc: formData.place_pic,       
-      handleCardClick: popupWithImage.open.bind(popupWithImage)
-    })
-  );    
-  popupWithPlaceForm.close();
-  addPlaceValidator.resetValidation();
+      link: formData.place_pic,
+    },
+    // если карточка добавлена успешно
+    () => {
+      cardsList.addItem(
+        createCard({
+          name: formData.place_name, 
+          pictureSrc: formData.place_pic,       
+          handleCardClick: popupWithImage.open.bind(popupWithImage)
+        })
+      );   
+      popupWithPlaceForm.close();
+      addPlaceValidator.resetValidation();
+    },
+    error => handleApiError(error)
+  );
+   
+  
 });
 
 popupWithPlaceForm.setEventListeners();
