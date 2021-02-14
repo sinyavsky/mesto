@@ -21,4 +21,8 @@ export default class Api {
   getUserInfo(onSuccess, onFailure) {
     this._getData('/users/me', onSuccess, onFailure);
   }
+
+  getInitialCards(onSuccess, onFailure) {
+    this._getData('/cards', onSuccess, onFailure);
+  }
 }
