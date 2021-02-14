@@ -31,11 +31,10 @@ const user = new UserInfo({
 });
 
 api.getUserInfo(
-  result => user.setUserInfo({
-    name: result.name,
-    bio: result.about,
-    ava: result.avatar        
-  }),
+  result => {
+      user.setUserInfo(result.name, result.about),
+      user.setUserAva(result.avatar);
+  },
   error => handleApiError(error)
 );
 

@@ -10,9 +10,12 @@ export default class UserInfo {
     return {name: this._name.textContent, bio: this._bio.textContent}
   }
 
-  setUserInfo({name, bio, ava}) {
+  setUserInfo(name, bio) {
     this._name.textContent = name;
-    this._bio.textContent = bio;
+    this._bio.textContent = bio;    
+  }
+
+  setUserAva(ava) {
     this._ava.src = ava;
   }
 
