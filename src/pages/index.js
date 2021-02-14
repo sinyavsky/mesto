@@ -123,15 +123,21 @@ popupWithPlaceForm.setEventListeners();
 // попап для редактирования инфы о пользователе
 const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData => {    
   api.patchUserInfo({
-      name: formData.user_name,
-      about: formData.user_bio,
-    }, 
-    // если данные сохранились - обновим их на странице
-    () => user.setUserInfo(formData.user_name, formData.user_bio),
-    error => handleApiError(error)
-  );
-  popupWithProfileForm.close();
-  profileValidator.resetValidation();
+    name: formData.user_name,
+    about: formData.user_bio,
+  })
+    .then(res => {
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+    })
+    .then(() => {
+      user.setUserInfo(formData.user_name, formData.user_bio);
+      popupWithProfileForm.close();
+      profileValidator.resetValidation();
+    })
+    .catch(err => handleApiError(err));   
 });
 
 popupWithProfileForm.setEventListeners();

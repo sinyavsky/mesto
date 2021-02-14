@@ -22,8 +22,8 @@ export default class Api {
     return this._getData('/cards');
   }
 
-  patchUserInfo({name, about}, onSuccess, onFailure) {
-    fetch(`${this.baseUrl}/users/me`, {
+  patchUserInfo({name, about}) {
+    return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this.token,
@@ -33,15 +33,7 @@ export default class Api {
         name: name,
         about: about
       })
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    })
-    .then(result => onSuccess(result))
-    .catch(err => onFailure(err)); 
+    });    
   }
 
   postCard({name, link}, onSuccess, onFailure) {
