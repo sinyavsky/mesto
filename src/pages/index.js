@@ -30,13 +30,7 @@ const user = new UserInfo({
   avaSel: '.profile__ava'
 });
 
-api.getUserInfo()
-  .then(res => {
-    if(res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-  })
+api.getUserInfo()  
   .then(result => {
     user.setUserInfo(result.name, result.about);
     user.setUserAva(result.avatar);
@@ -54,12 +48,6 @@ addPlaceValidator.enableValidation();
 // загружаем и рендерим начальные карточки
 let cardsList = undefined; // мб есть более элегантный способ, без использования этой переменной?
 api.getInitialCards()
-  .then(res => {
-    if(res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-  })
   .then(result => {
     // собираем только те данные, которые нам нужны
     const initialCards = result.reduce((cards, current) => {
@@ -97,13 +85,7 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
   api.postCard({
     name: formData.place_name, 
     link: formData.place_pic,
-  })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    })
+  })    
     .then(() => {
       cardsList.addItem(
         createCard({
@@ -127,13 +109,7 @@ const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData =
   api.patchUserInfo({
     name: formData.user_name,
     about: formData.user_bio,
-  })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    })
+  })    
     .then(() => {
       user.setUserInfo(formData.user_name, formData.user_bio);
       popupWithProfileForm.close();

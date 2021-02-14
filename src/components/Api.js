@@ -11,6 +11,12 @@ export default class Api {
         authorization: this.token,
         'Content-Type': 'application/json'
       }
+    })
+    .then(res => {
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
     });    
   }
 
@@ -33,6 +39,12 @@ export default class Api {
         name: name,
         about: about
       })
+    })
+    .then(res => {
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
     });    
   }
 
@@ -47,6 +59,12 @@ export default class Api {
         name: name,
         link: link
       })
+    })
+    .then(res => {
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
     });
   }
 }
