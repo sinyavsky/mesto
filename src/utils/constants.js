@@ -32,16 +32,6 @@ export const initialCards = [
   }
 ]; 
 
-export const cardDefaultSettings = {
-  templateSelector: '.card-template',
-  cardSelector: '.card-list__item',
-  nameSelector: '.card__name',
-  pictureSelector: '.card__picture',
-  likeSelector: '.card__like',
-  removeSelector: '.card__remove',    
-  likeActiveClass: 'card__like_active' 
-};
-
 export const validationConfig = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
