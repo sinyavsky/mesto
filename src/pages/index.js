@@ -121,6 +121,14 @@ const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData =
 popupWithProfileForm.setEventListeners();
 
 
+// попап для подтверждения удаления карточки
+const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', formData => {    
+  console.log(formData.card_id);
+});
+
+popupWithConfirmForm.setEventListeners();
+
+
 // кнопка редактирования инфы о пользователе
 document.querySelector('.profile__edit').addEventListener('click', () => {
   const userData = user.getUserInfo();
