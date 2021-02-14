@@ -6,6 +6,7 @@ export default class Api {
 
   _getData(path, onSuccess, onFailure) {
     fetch(this.baseUrl + path, {
+      method: 'GET',
       headers: this.headers
     })
     .then(res => {
