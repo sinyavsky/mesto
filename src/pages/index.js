@@ -97,8 +97,15 @@ popupWithPlaceForm.setEventListeners();
 
 
 // попап для редактирования инфы о пользователе
-const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData => {
-  user.setUserInfo({name: formData.user_name, bio: formData.user_bio});  
+const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData => {    
+  api.patchUserInfo({
+      name: formData.user_name,
+      about: formData.user_bio,
+    }, 
+    // если данные сохранились - обновим их на странице
+    () => user.setUserInfo(formData.user_name, formData.user_bio),
+    error => handleApiError(error)
+  );
   popupWithProfileForm.close();
   profileValidator.resetValidation();
 });
