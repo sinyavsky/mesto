@@ -95,11 +95,16 @@ popupWithImage.setEventListeners();
 // попап с формой добавления карточек
 const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
   api.postCard({
-      name: formData.place_name, 
-      link: formData.place_pic,
-    },
-    // если карточка добавлена успешно
-    () => {
+    name: formData.place_name, 
+    link: formData.place_pic,
+  })
+    .then(res => {
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+    })
+    .then(() => {
       cardsList.addItem(
         createCard({
           name: formData.place_name, 
@@ -110,11 +115,8 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
       );   
       popupWithPlaceForm.close();
       addPlaceValidator.resetValidation();
-    },
-    error => handleApiError(error)
-  );
-   
-  
+    })
+    .catch(err => handleApiError(err)); 
 });
 
 popupWithPlaceForm.setEventListeners();

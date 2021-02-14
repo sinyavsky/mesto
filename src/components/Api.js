@@ -36,8 +36,8 @@ export default class Api {
     });    
   }
 
-  postCard({name, link}, onSuccess, onFailure) {
-    fetch(`${this.baseUrl}/cards`, {
+  postCard({name, link}) {
+    return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
       headers: {
         authorization: this.token,
@@ -47,14 +47,6 @@ export default class Api {
         name: name,
         link: link
       })
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    })
-    .then(result => onSuccess(result))
-    .catch(err => onFailure(err)); 
+    });
   }
 }
