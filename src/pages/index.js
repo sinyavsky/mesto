@@ -2,7 +2,9 @@ import './index.css';
 
 import {
   initialCards,
-  validationConfig
+  validationConfig,
+  userNameInput,
+  userBioInput
 } from '../utils/constants.js';
 
 import {
@@ -77,8 +79,8 @@ popupWithProfileForm.setEventListeners();
 // кнопка редактирования инфы о пользователе
 document.querySelector('.profile__edit').addEventListener('click', () => {
   const userData = user.getUserInfo();
-  document.querySelector('.popup__input_type_name').value = userData.name;
-  document.querySelector('.popup__input_type_bio').value = userData.bio;
+  userNameInput.value = userData.name;
+  userBioInput.value = userData.bio;
   profileValidator.resetValidation();
   popupWithProfileForm.open();
 });
