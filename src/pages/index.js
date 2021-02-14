@@ -26,18 +26,17 @@ const api = new Api({
   }
 }); 
 
-api.getUserInfo(
-  (result) => {
-    console.log(result);
-  },
-  (error) => {
-    console.log(error);
-  }
-);
-
 // информация о пользователе
-const user = new UserInfo({nameSel: '.profile__name', bioSel: '.profile__bio'});
+const user = new UserInfo({
+  nameSel: '.profile__name',
+  bioSel: '.profile__bio',
+  avaSel: '.profile__ava'
+});
 
+api.getUserInfo(
+  result => user.setUserInfo(result),
+  error => console.log(error)
+);
 
 // включаем валидацию всем формам
 const profileValidator = new FormValidator(validationConfig, document.querySelector('.popup__form_type_profile'));
