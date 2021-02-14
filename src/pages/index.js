@@ -34,7 +34,11 @@ const user = new UserInfo({
 });
 
 api.getUserInfo(
-  result => user.setUserInfo(result),
+  result => user.setUserInfo({
+    name: result.name,
+    bio: result.about,
+    ava: result.avatar        
+  }),
   error => console.log(error)
 );
 

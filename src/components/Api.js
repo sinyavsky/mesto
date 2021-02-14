@@ -4,8 +4,8 @@ export default class Api {
     this.headers = headers;
   }
 
-  getUserInfo(onSuccess, onFailure) {
-    fetch(`${this.baseUrl}/users/me`, {
+  _getData(path, onSuccess, onFailure) {
+    fetch(this.baseUrl + path, {
       headers: this.headers
     })
     .then(res => {
@@ -14,15 +14,11 @@ export default class Api {
       }
       return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
     })
-    .then((result) => {
-      onSuccess({
-        name: result.name,
-        bio: result.about,
-        ava: result.avatar        
-      });
-    })
-    .catch((err) => {
-      onFailure(err);
-    }); 
+    .then(result => onSuccess(result))
+    .catch(err => onFailure(err)); 
+  }
+
+  getUserInfo(onSuccess, onFailure) {
+    this._getData('/users/me', onSuccess, onFailure);
   }
 }
