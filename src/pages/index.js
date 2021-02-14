@@ -1,7 +1,6 @@
 import './index.css';
 
 import {
-  initialCards,
   validationConfig,
   userNameInput,
   userBioInput
@@ -50,21 +49,35 @@ profileValidator.enableValidation();
 const addPlaceValidator = new FormValidator(validationConfig, document.querySelector('.popup__form_type_place'));
 addPlaceValidator.enableValidation();
 
+// загружаем и рендерим начальные карточки
 
-// рендер карточек
-const cardsList = new Section({
-  items: initialCards, 
-  renderer: item => cardsList.addItem(
-    createCard({
-      name: item.name, 
-      pictureSrc: item.link,         
-      handleCardClick: popupWithImage.open.bind(popupWithImage)
-    })
-  )
-}, '.cards__list');
+let cardsList = undefined; // мб есть более элегантный способ, без использования этой переменной?
+api.getInitialCards(
+  result => {
+    // собираем только те данные, которые нам нужны
+    const initialCards = result.reduce((cards, current) => {
+      cards.push({
+        name: current.name,
+        link: current.link
+      });
+      return cards;
+    }, []);    
 
-document.addEventListener('DOMContentLoaded', () => cardsList.renderElements());
-
+    cardsList = new Section({
+      items: initialCards, 
+      renderer: item => cardsList.addItem(
+        createCard({
+          name: item.name, 
+          pictureSrc: item.link,         
+          handleCardClick: popupWithImage.open.bind(popupWithImage)
+        })
+      )
+    }, '.cards__list');    
+    
+    cardsList.renderElements();
+  },
+  error => handleApiError(error)
+);
 
 // попап для увеличения картинок
 const popupWithImage = new PopupWithImage('.popup_type_picture');
