@@ -8,7 +8,8 @@ import {
 } from '../utils/constants.js';
 
 import {
-  createCard
+  createCard,
+  handleApiError
 } from '../utils/functions.js';
 
 import FormValidator from '../components/FormValidator.js';
@@ -39,7 +40,7 @@ api.getUserInfo(
     bio: result.about,
     ava: result.avatar        
   }),
-  error => console.log(error)
+  error => handleApiError(error)
 );
 
 // включаем валидацию всем формам

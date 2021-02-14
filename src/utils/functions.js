@@ -14,3 +14,8 @@ export const createCard = ({name, pictureSrc, handleCardClick}) => {
       handleCardClick: handleCardClick
     }).createCard();
 }
+
+export const handleApiError = message => {
+  // мб в будущих спринтах будет задача обрабатывать ошибки как-то иначе, пока оставлю так
+  console.log(message);
+}
