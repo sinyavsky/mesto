@@ -20,10 +20,7 @@ import Api from '../components/Api.js';
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
-  headers: {
-    authorization: '8c32355f-4347-4868-8ec7-20db7d4995bd',
-    'Content-Type': 'application/json'
-  }
+  token: '8c32355f-4347-4868-8ec7-20db7d4995bd'
 }); 
 
 // информация о пользователе

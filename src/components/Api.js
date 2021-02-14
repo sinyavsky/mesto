@@ -1,13 +1,16 @@
 export default class Api {
-  constructor({baseUrl, headers}) {
+  constructor({baseUrl, token}) {
     this.baseUrl = baseUrl;
-    this.headers = headers;
+    this.token = token;
   }
 
   _getData(path, onSuccess, onFailure) {
     fetch(this.baseUrl + path, {
       method: 'GET',
-      headers: this.headers
+      headers: {
+        authorization: this.token,
+        'Content-Type': 'application/json'
+      }
     })
     .then(res => {
       if(res.ok) {
