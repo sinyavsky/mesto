@@ -30,13 +30,18 @@ const user = new UserInfo({
   avaSel: '.profile__ava'
 });
 
-api.getUserInfo(
-  result => {
-      user.setUserInfo(result.name, result.about),
-      user.setUserAva(result.avatar);
-  },
-  error => handleApiError(error)
-);
+api.getUserInfo()
+  .then(res => {
+    if(res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+  })
+  .then(result => {
+    user.setUserInfo(result.name, result.about);
+    user.setUserAva(result.avatar);
+  })
+  .catch(err => handleApiError(err));
 
 // включаем валидацию всем формам
 const profileValidator = new FormValidator(validationConfig, document.querySelector('.popup__form_type_profile'));
@@ -45,11 +50,17 @@ profileValidator.enableValidation();
 const addPlaceValidator = new FormValidator(validationConfig, document.querySelector('.popup__form_type_place'));
 addPlaceValidator.enableValidation();
 
-// загружаем и рендерим начальные карточки
 
+// загружаем и рендерим начальные карточки
 let cardsList = undefined; // мб есть более элегантный способ, без использования этой переменной?
-api.getInitialCards(
-  result => {
+api.getInitialCards()
+  .then(res => {
+    if(res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+  })
+  .then(result => {
     // собираем только те данные, которые нам нужны
     const initialCards = result.reduce((cards, current) => {
       cards.push({
@@ -70,12 +81,11 @@ api.getInitialCards(
           handleCardClick: popupWithImage.open.bind(popupWithImage)
         })
       )
-    }, '.cards__list');    
-    
+    }, '.cards__list');   
+  
     cardsList.renderElements();
-  },
-  error => handleApiError(error)
-);
+  })
+  .catch(err => handleApiError(err));
 
 // попап для увеличения картинок
 const popupWithImage = new PopupWithImage('.popup_type_picture');
