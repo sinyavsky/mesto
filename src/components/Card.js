@@ -3,6 +3,7 @@ export default class Card {
   constructor(settings) {
     this._name = settings.name;
     this._pictureSrc = settings.pictureSrc;
+    this._likes = settings.likes;
     this._templateSelector = settings.templateSelector;
     this._cardSelector = settings.cardSelector;
     this._nameSelector = settings.nameSelector;
@@ -25,6 +26,7 @@ export default class Card {
     this._card = document.querySelector(this._templateSelector).content.cloneNode(true);   
     const cardName = this._card.querySelector(this._nameSelector);
     const cardPic = this._card.querySelector(this._pictureSelector);
+    const cardLikes = this._card.querySelector(this._likeSelector);
   
     // длинные названия не поместятся, поэтому утанавливаем и title
     cardName.textContent = this._name;
@@ -33,6 +35,8 @@ export default class Card {
     cardPic.src = this._pictureSrc;
     cardPic.alt = this._name;
     cardPic.title = this._name;
+
+    cardLikes.textContent = this._likes;
   }  
 
   _setEventListeners = () => {

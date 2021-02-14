@@ -54,7 +54,8 @@ api.getInitialCards(
     const initialCards = result.reduce((cards, current) => {
       cards.push({
         name: current.name,
-        link: current.link
+        link: current.link,
+        likes: current.likes.length
       });
       return cards;
     }, []);    
@@ -64,7 +65,8 @@ api.getInitialCards(
       renderer: item => cardsList.addItem(
         createCard({
           name: item.name, 
-          pictureSrc: item.link,         
+          pictureSrc: item.link,   
+          likes: item.likes,      
           handleCardClick: popupWithImage.open.bind(popupWithImage)
         })
       )
@@ -91,7 +93,8 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
       cardsList.addItem(
         createCard({
           name: formData.place_name, 
-          pictureSrc: formData.place_pic,       
+          pictureSrc: formData.place_pic,     
+          likes: 0,  
           handleCardClick: popupWithImage.open.bind(popupWithImage)
         })
       );   
