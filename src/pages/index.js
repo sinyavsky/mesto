@@ -31,10 +31,7 @@ const user = new UserInfo({
 });
 
 api.getUserInfo()  
-  .then(result => {
-    user.setUserInfo(result.name, result.about);
-    user.setUserAva(result.avatar);
-  })
+  .then(result => user.initUserData(result))
   .catch(err => handleApiError(err));
 
 // включаем валидацию всем формам
@@ -124,7 +121,7 @@ const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData =
     about: formData.user_bio,
   })    
     .then(() => {
-      user.setUserInfo(formData.user_name, formData.user_bio);
+      user.updateUserInfo(formData.user_name, formData.user_bio);
       popupWithProfileForm.close();
       profileValidator.resetValidation();
     })
