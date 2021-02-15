@@ -81,9 +81,10 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
     name: formData.place_name, 
     link: formData.place_pic,
   })    
-    .then(() => {
+    .then((result) => {
       cardsList.addItem(
         createCard({
+          id: result._id,
           name: formData.place_name, 
           pictureSrc: formData.place_pic,     
           likes: 0,  
@@ -125,8 +126,6 @@ popupWithProfileForm.setEventListeners();
 // попап для подтверждения удаления карточки
 const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', () => {
   const card = popupWithConfirmForm.getOptions().elementToDelete;
-  console.log(card);
-  console.log(card.getCardId());
   api.deleteCard(card.getCardId())
     .catch(err => handleApiError(err));   
   card.removeCard();
