@@ -29,4 +29,8 @@ export default class UserInfo {
     }
   }    
 
+  getUserId() {
+    return this._id;
+  }
+
 }
