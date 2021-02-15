@@ -44,7 +44,6 @@ profileValidator.enableValidation();
 const addPlaceValidator = new FormValidator(validationConfig, document.querySelector('.popup__form_type_place'));
 addPlaceValidator.enableValidation();
 
-
 // загружаем и рендерим начальные карточки
 let cardsList = undefined; // мб есть более элегантный способ, без использования этой переменной?
 api.getInitialCards()
@@ -54,7 +53,8 @@ api.getInitialCards()
       cards.push({
         name: current.name,
         link: current.link,
-        likes: current.likes.length
+        likes: current.likes.length,
+        id: current._id
       });
       return cards;
     }, []);    
@@ -65,8 +65,15 @@ api.getInitialCards()
         createCard({
           name: item.name, 
           pictureSrc: item.link,   
-          likes: item.likes,      
-          handleCardClick: popupWithImage.open.bind(popupWithImage)
+          likes: item.likes,
+          id: item.id,      
+          handleCardClick: popupWithImage.open.bind(popupWithImage),
+          handleDeleteClick: (cardElement) => {
+            popupWithConfirmForm.setOptions({
+              elementToDelete: cardElement
+            });
+            popupWithConfirmForm.open();            
+          }
         })
       )
     }, '.cards__list');   
@@ -92,7 +99,13 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
           name: formData.place_name, 
           pictureSrc: formData.place_pic,     
           likes: 0,  
-          handleCardClick: popupWithImage.open.bind(popupWithImage)
+          handleCardClick: popupWithImage.open.bind(popupWithImage),
+          handleDeleteClick: (cardElement) => {
+            popupWithConfirmForm.setOptions({
+              elementToDelete: cardElement
+            });
+            popupWithConfirmForm.open();            
+          }
         })
       );   
       popupWithPlaceForm.close();
@@ -122,8 +135,10 @@ popupWithProfileForm.setEventListeners();
 
 
 // попап для подтверждения удаления карточки
-const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', formData => {    
-  console.log(formData.card_id);
+const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', () => {  
+  popupWithConfirmForm.getOptions().elementToDelete.removeCard();
+  popupWithConfirmForm.clearOptions();
+  popupWithConfirmForm.close();
 });
 
 popupWithConfirmForm.setEventListeners();

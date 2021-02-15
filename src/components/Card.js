@@ -1,6 +1,7 @@
 export default class Card {
 
   constructor(settings) {
+    this._id = settings.id;
     this._name = settings.name;
     this._pictureSrc = settings.pictureSrc;
     this._likes = settings.likes;
@@ -12,21 +13,22 @@ export default class Card {
     this._removeSelector = settings.removeSelector;
     this._likeActiveClass = settings.likeActiveClass;
     this._handleCardClick = settings.handleCardClick;    
+    this._handleDeleteClick = settings.handleDeleteClick;
   }
 
   _toggleLike = (evt) => {
     evt.target.classList.toggle(this._likeActiveClass);
   }
 
-  _removeCard = (evt) => {
-    evt.target.closest(this._cardSelector).remove();
+  removeCard = () => {
+    this._cardElement.remove();
   }
 
   _createCardElement = () => {
     this._card = document.querySelector(this._templateSelector).content.cloneNode(true);   
     const cardName = this._card.querySelector(this._nameSelector);
     const cardPic = this._card.querySelector(this._pictureSelector);
-    const cardLikes = this._card.querySelector(this._likeSelector);
+    const cardLikes = this._card.querySelector(this._likeSelector);    
   
     // длинные названия не поместятся, поэтому утанавливаем и title
     cardName.textContent = this._name;
@@ -42,7 +44,11 @@ export default class Card {
   _setEventListeners = () => {
     this._card.querySelector(this._pictureSelector).addEventListener('click', () => this._handleCardClick(this._name, this._pictureSrc));  
     this._card.querySelector(this._likeSelector).addEventListener('click', this._toggleLike);
-    this._card.querySelector(this._removeSelector).addEventListener('click', this._removeCard)
+    this._card.querySelector(this._removeSelector).addEventListener('click', (evt) => {
+      // этот элемент нам понадобится при вызове removeCard()
+      this._cardElement = evt.target.closest(this._cardSelector);
+      this._handleDeleteClick(this);
+    });
   }
 
   createCard = () => {

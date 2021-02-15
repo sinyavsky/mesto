@@ -20,12 +20,29 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', () => this._submitEvent(this._getInputValues()));
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._submitEvent(this._getInputValues())
+    });
   }
 
   close() {
     super.close();
     this._form.reset();
+  }
+  
+  // опции = доп. данные, которые могут понадобиться поп-апу для работы
+
+  setOptions(options) {
+    this._options = options;
+  }
+
+  getOptions() {
+    return this._options;
+  }
+
+  clearOptions() {
+    this._options = undefined;
   }
 
 }
