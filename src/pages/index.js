@@ -53,7 +53,7 @@ api.getInitialCards()
             name: item.name, 
             pictureSrc: item.link,   
             likes: item.likes.length,
-            id: item.id,      
+            id: item._id,      
             handleCardClick: popupWithImage.open.bind(popupWithImage),
             handleDeleteClick: (cardElement) => {
               popupWithConfirmForm.setOptions({
@@ -123,8 +123,13 @@ popupWithProfileForm.setEventListeners();
 
 
 // попап для подтверждения удаления карточки
-const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', () => {  
-  popupWithConfirmForm.getOptions().elementToDelete.removeCard();
+const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', () => {
+  const card = popupWithConfirmForm.getOptions().elementToDelete;
+  console.log(card);
+  console.log(card.getCardId());
+  api.deleteCard(card.getCardId())
+    .catch(err => handleApiError(err));   
+  card.removeCard();
   popupWithConfirmForm.clearOptions();
   popupWithConfirmForm.close();
 });
