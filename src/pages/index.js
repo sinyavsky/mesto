@@ -44,35 +44,26 @@ addPlaceValidator.enableValidation();
 // загружаем и рендерим начальные карточки
 let cardsList = undefined; // мб есть более элегантный способ, без использования этой переменной?
 api.getInitialCards()
-  .then(result => {
-    // собираем только те данные, которые нам нужны
-    const initialCards = result.reduce((cards, current) => {
-      cards.push({
-        name: current.name,
-        link: current.link,
-        likes: current.likes.length,
-        id: current._id
-      });
-      return cards;
-    }, []);    
-
+  .then(result => { 
     cardsList = new Section({
-      items: initialCards, 
-      renderer: item => cardsList.addItem(
-        createCard({
-          name: item.name, 
-          pictureSrc: item.link,   
-          likes: item.likes,
-          id: item.id,      
-          handleCardClick: popupWithImage.open.bind(popupWithImage),
-          handleDeleteClick: (cardElement) => {
-            popupWithConfirmForm.setOptions({
-              elementToDelete: cardElement
-            });
-            popupWithConfirmForm.open();            
-          }
-        })
-      )
+      items: result, 
+      renderer: item => {
+        cardsList.addItem(
+          createCard({
+            name: item.name, 
+            pictureSrc: item.link,   
+            likes: item.likes.length,
+            id: item.id,      
+            handleCardClick: popupWithImage.open.bind(popupWithImage),
+            handleDeleteClick: (cardElement) => {
+              popupWithConfirmForm.setOptions({
+                elementToDelete: cardElement
+              });
+              popupWithConfirmForm.open();            
+            }
+          }, user.getUserId() === item.owner._id)
+        );
+      }
     }, '.cards__list');   
   
     cardsList.renderElements();
@@ -103,7 +94,7 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
             });
             popupWithConfirmForm.open();            
           }
-        })
+        }, true)
       );   
       popupWithPlaceForm.close();
       addPlaceValidator.resetValidation();

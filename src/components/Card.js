@@ -24,12 +24,15 @@ export default class Card {
     this._cardElement.remove();
   }
 
-  _createCardElement = () => {
+  _createCardElement = (isOwner) => {
     this._card = document.querySelector(this._templateSelector).content.cloneNode(true);   
     const cardName = this._card.querySelector(this._nameSelector);
     const cardPic = this._card.querySelector(this._pictureSelector);
     const cardLikes = this._card.querySelector(this._likeSelector);    
   
+    if(!isOwner)  // значит удалять нельзя
+      this._card.querySelector(this._removeSelector).remove();
+
     // длинные названия не поместятся, поэтому утанавливаем и title
     cardName.textContent = this._name;
     cardName.title = this._name;
@@ -44,15 +47,21 @@ export default class Card {
   _setEventListeners = () => {
     this._card.querySelector(this._pictureSelector).addEventListener('click', () => this._handleCardClick(this._name, this._pictureSrc));  
     this._card.querySelector(this._likeSelector).addEventListener('click', this._toggleLike);
-    this._card.querySelector(this._removeSelector).addEventListener('click', (evt) => {
-      // этот элемент нам понадобится при вызове removeCard()
-      this._cardElement = evt.target.closest(this._cardSelector);
-      this._handleDeleteClick(this);
-    });
+    
+    // т.к. кнопка удаления есть не у всех карточек
+    const removeButton = this._card.querySelector(this._removeSelector);
+    if(removeButton)
+    {
+      removeButton.addEventListener('click', (evt) => {
+        // этот элемент нам понадобится при вызове removeCard()
+        this._cardElement = evt.target.closest(this._cardSelector);
+        this._handleDeleteClick(this);
+      });
+    }    
   }
 
-  createCard = () => {
-    this._createCardElement();
+  createCard = (isOwner) => {
+    this._createCardElement(isOwner);
     this._setEventListeners();    
     
     return this._card;  
