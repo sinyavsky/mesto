@@ -48,13 +48,30 @@ api.getInitialCards()
     cardsList = new Section({
       items: result, 
       renderer: item => {
+        const isLiked = item.likes.some(like => {
+            return like._id === user.getUserId();
+        });
+
         cardsList.addItem(
           createCard({
             name: item.name, 
             pictureSrc: item.link,   
-            likes: item.likes.length,
+            likesCounter: item.likes.length,
+            isLiked: isLiked,
             id: item._id,      
             handleCardClick: popupWithImage.open.bind(popupWithImage),
+            handleLikeClick: (card, like) => {
+              if(like) {
+                api.putLike(card.getCardId())
+                  .then(result => card.updateLikesCounter(result.likes.length))
+                  .catch(err => handleApiError(err));
+              }
+              else {
+                api.deleteLike(card.getCardId())
+                  .then(result => card.updateLikesCounter(result.likes.length))
+                  .catch(err => handleApiError(err));
+              }
+            },
             handleDeleteClick: (cardElement) => {
               popupWithConfirmForm.setOptions({
                 elementToDelete: cardElement
@@ -81,14 +98,27 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
     name: formData.place_name, 
     link: formData.place_pic,
   })    
-    .then((result) => {
+    .then((result) => {       
+
       cardsList.addItem(
         createCard({
           id: result._id,
           name: formData.place_name, 
           pictureSrc: formData.place_pic,     
-          likes: 0,  
+          likesCounter: 0,  
           handleCardClick: popupWithImage.open.bind(popupWithImage),
+          handleLikeClick: (card, like) => {
+            if(like) {
+              api.putLike(card.getCardId())
+                .then(result => card.updateLikesCounter(result.likes.length))
+                .catch(err => handleApiError(err));
+            }
+            else {
+              api.deleteLike(card.getCardId())
+                .then(result => card.updateLikesCounter(result.likes.length))
+                .catch(err => handleApiError(err));
+            }
+          },
           handleDeleteClick: (cardElement) => {
             popupWithConfirmForm.setOptions({
               elementToDelete: cardElement

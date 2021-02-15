@@ -1,6 +1,6 @@
 import Card from '../components/Card.js';
 
-export const createCard = ({name, id, pictureSrc, likes, handleCardClick, handleDeleteClick}, isOwner) => {
+export const createCard = ({name, id, pictureSrc, likesCounter, isLiked, handleCardClick, handleLikeClick, handleDeleteClick}, isOwner) => {
     return new Card({
       templateSelector: '.card-template',
       cardSelector: '.card-list__item',
@@ -12,8 +12,10 @@ export const createCard = ({name, id, pictureSrc, likes, handleCardClick, handle
       id: id,
       name: name, 
       pictureSrc: pictureSrc,       
-      likes: likes,      
+      likesCounter: likesCounter,     
+      isLiked: isLiked, 
       handleCardClick: handleCardClick,
+      handleLikeClick: handleLikeClick,
       handleDeleteClick: handleDeleteClick
     }).createCard(isOwner);
 }
