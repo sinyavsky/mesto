@@ -12,7 +12,7 @@ export default class UserInfo {
 
   initUserData(data) {   
     this._id = data._id;    
-    this._ava.src = data.avatar;
+    this.updateUserAvatar(data.avatar)
     this.updateUserInfo(data.name, data.about);
   }
 
@@ -20,6 +20,10 @@ export default class UserInfo {
     this._name.textContent = name;
     this._bio.textContent = bio;
     this._ava.alt = `${name} - фото профиля`;    
+  }
+
+  updateUserAvatar(ava) {
+    this._ava.src = ava;
   }
 
   getUserInfo() {

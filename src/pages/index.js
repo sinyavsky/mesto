@@ -41,6 +41,9 @@ profileValidator.enableValidation();
 const addPlaceValidator = new FormValidator(validationConfig, document.querySelector('.popup__form_type_place'));
 addPlaceValidator.enableValidation();
 
+const avatarEditValidator = new FormValidator(validationConfig, document.querySelector('.popup__form_type_avatar'));
+avatarEditValidator.enableValidation();
+
 // загружаем и рендерим начальные карточки
 let cardsList = undefined; // мб есть более элегантный способ, без использования этой переменной?
 api.getInitialCards()
@@ -151,6 +154,19 @@ const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData =
 
 popupWithProfileForm.setEventListeners();
 
+// попап для редактирования аватара
+const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', formData => {   
+  api.patchUserAvatar(formData.avatar)
+    .then(() => {
+      user.updateUserAvatar(formData.avatar);
+      popupWithAvatarForm.close();
+      popupWithAvatarForm.resetValidation();
+    })
+    .catch(err => handleApiError(err));
+});
+
+popupWithAvatarForm.setEventListeners();
+
 
 // попап для подтверждения удаления карточки
 const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', () => {
@@ -174,6 +190,11 @@ document.querySelector('.profile__edit').addEventListener('click', () => {
   popupWithProfileForm.open();
 });
 
+// кнопка редактирования аватара
+document.querySelector('.profile__ava-edit').addEventListener('click', () => {
+  avatarEditValidator.resetValidation();
+  popupWithAvatarForm.open();
+});
 
 // кнопка добавления новой карточки
 document.querySelector('.profile__add').addEventListener('click', () => {
