@@ -1,6 +1,7 @@
 import Card from '../components/Card.js';
 
-export const createCard = ({name, id, pictureSrc, likesCounter, isLiked, handleCardClick, handleLikeClick, handleDeleteClick}, isOwner) => {
+export const createCard = ({id, name, pictureSrc, likesCounter, isLiked, isOwner, 
+                            handleCardClick, handleLikeClick, handleDeleteClick}) => {
     return new Card({
       templateSelector: '.card-template',
       cardSelector: '.card-list__item',
@@ -14,10 +15,11 @@ export const createCard = ({name, id, pictureSrc, likesCounter, isLiked, handleC
       pictureSrc: pictureSrc,       
       likesCounter: likesCounter,     
       isLiked: isLiked, 
+      isOwner: isOwner,
       handleCardClick: handleCardClick,
       handleLikeClick: handleLikeClick,
       handleDeleteClick: handleDeleteClick
-    }).createCard(isOwner);
+    }).createCard();
 }
 
 export const handleApiError = message => {

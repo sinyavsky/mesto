@@ -9,6 +9,7 @@ export default class PopupWithForm extends Popup {
     this._submitEvent = submitEvent;
     this._form = this._popup.querySelector('form');
     this._button = this._form.querySelector('button');
+    this._buttonTextDefault = this._button.textContent;
   }
 
   _getInputValues() {
@@ -32,8 +33,7 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
   
-  setButtonStateUpdating(text) {
-    this._buttonTextDefault = this._button.textContent;
+  setButtonStateUpdating(text) {    
     this._button.textContent = text;
     this._button.disabled = true;
   }
@@ -54,7 +54,7 @@ export default class PopupWithForm extends Popup {
   }
 
   clearOptions() {
-    this._options = undefined;
+    this._options = null;
   }
 
 }
