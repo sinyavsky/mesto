@@ -1,5 +1,5 @@
 .popup__submit {
-  margin-top: 12px;
+  margin-top: 9px;
   background: #000;
   border-radius: 2px;
   color: #fff;
@@ -23,6 +23,5 @@
     font-size: 18px;
     line-height: 1.22;
     height: 50px;
-    margin-top: 20px;
   }
 }
