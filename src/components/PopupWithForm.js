@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
 
     this._submitEvent = submitEvent;
     this._form = this._popup.querySelector('form');
+    this._button = this._form.querySelector('button');
   }
 
   _getInputValues() {
@@ -31,6 +32,17 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
   
+  setButtonStateUpdating(text) {
+    this._buttonTextDefault = this._button.textContent;
+    this._button.textContent = text;
+    this._button.disabled = true;
+  }
+
+  resetButtonState() {
+    this._button.textContent = this._buttonTextDefault;
+    this._button.disabled = false;
+  }
+
   // опции = доп. данные, которые могут понадобиться поп-апу для работы
 
   setOptions(options) {

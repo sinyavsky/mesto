@@ -97,6 +97,7 @@ popupWithImage.setEventListeners();
 
 // попап с формой добавления карточек
 const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
+  popupWithPlaceForm.setButtonStateUpdating('Сохранение...');
   api.postCard({
     name: formData.place_name, 
     link: formData.place_pic,
@@ -133,13 +134,17 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
       popupWithPlaceForm.close();
       addPlaceValidator.resetValidation();
     })
-    .catch(err => handleApiError(err)); 
+    .catch(err => handleApiError(err))
+    .finally(() => {
+      popupWithPlaceForm.resetButtonState();
+    }); 
 });
 
 popupWithPlaceForm.setEventListeners();
 
 // попап для редактирования инфы о пользователе
 const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData => {    
+  popupWithProfileForm.setButtonStateUpdating('Сохранение...');
   api.patchUserInfo({
     name: formData.user_name,
     about: formData.user_bio,
@@ -149,20 +154,26 @@ const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData =
       popupWithProfileForm.close();
       profileValidator.resetValidation();
     })
-    .catch(err => handleApiError(err));   
+    .catch(err => handleApiError(err))
+    .finally(() => {
+      popupWithProfileForm.resetButtonState();
+    });   
 });
 
 popupWithProfileForm.setEventListeners();
 
 // попап для редактирования аватара
 const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', formData => {   
+  popupWithAvatarForm.setButtonStateUpdating('Сохранение...');
   api.patchUserAvatar(formData.avatar)
     .then(() => {
       user.updateUserAvatar(formData.avatar);
       popupWithAvatarForm.close();
-      avatarEditValidator.resetValidation();
     })
-    .catch(err => handleApiError(err));
+    .catch(err => handleApiError(err))
+    .finally(() => {
+      popupWithAvatarForm.resetButtonState();
+    });
 });
 
 popupWithAvatarForm.setEventListeners();
@@ -170,7 +181,7 @@ popupWithAvatarForm.setEventListeners();
 
 // попап для подтверждения удаления карточки
 const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', () => {
-  const card = popupWithConfirmForm.getOptions().elementToDelete;
+  const card = popupWithConfirmForm.getOptions().elementToDelete;  console.log('wtf');
   api.deleteCard(card.getCardId())
     .catch(err => handleApiError(err));   
   card.removeCard();
