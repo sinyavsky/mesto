@@ -135,7 +135,6 @@ const popupWithPlaceForm = new PopupWithForm('.popup_type_place', formData => {
 
 popupWithPlaceForm.setEventListeners();
 
-
 // попап для редактирования инфы о пользователе
 const popupWithProfileForm = new PopupWithForm('.popup_type_profile', formData => {    
   api.patchUserInfo({
