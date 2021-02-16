@@ -160,7 +160,7 @@ const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', formData => 
     .then(() => {
       user.updateUserAvatar(formData.avatar);
       popupWithAvatarForm.close();
-      popupWithAvatarForm.resetValidation();
+      avatarEditValidator.resetValidation();
     })
     .catch(err => handleApiError(err));
 });
