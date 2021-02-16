@@ -1,134 +1,112 @@
 export default class Api {
+
   constructor({baseUrl, token}) {
     this.baseUrl = baseUrl;
     this.token = token;
   }
 
-  _getData(path) {
-    return fetch(this.baseUrl + path, {
-      method: 'GET',
+  _makeRequest({method, path, contentType=null, body=null}) {     
+    const options = {
+      method: method,
       headers: {
-        authorization: this.token,
-        'Content-Type': 'application/json'
+        authorization: this.token
       }
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    });    
-  }
+    };
+
+    if(contentType) {
+      options.headers['Content-Type'] = contentType;
+    }
+
+    if(body) {
+      options.body = body;
+    }
+
+    return fetch(this.baseUrl + path, options)
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+      });    
+  }  
+
+
+  // пользователь
 
   getUserInfo() {
-    return this._getData('/users/me');
-  }
-
-  getInitialCards() {
-    return this._getData('/cards');
+    return this._makeRequest({
+      method: 'GET',
+      path: '/users/me'
+    });
   }
 
   patchUserInfo({name, about}) {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return this._makeRequest({
       method: 'PATCH',
-      headers: {
-        authorization: this.token,
-        'Content-Type': 'application/json'
-      },
+      path: '/users/me',
+      contentType: 'application/json',
       body: JSON.stringify({
         name: name,
         about: about
       })
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
     });    
   }
 
+  patchUserAvatar(ava) {
+    return this._makeRequest({
+      method: 'PATCH',
+      path: '/users/me/avatar',
+      contentType: 'application/json',
+      body: JSON.stringify({
+        avatar: ava
+      })
+    });    
+  }  
+
+
+  // карточки
+
+  getInitialCards() {
+    return this._makeRequest({
+      method: 'GET',
+      path: '/cards'
+    });
+  }  
+
   postCard({name, link}) {
-    return fetch(`${this.baseUrl}/cards`, {
+    return this._makeRequest({
       method: 'POST',
-      headers: {
-        authorization: this.token,
-        'Content-Type': 'application/json'
-      },
+      path: '/cards',
+      contentType: 'application/json',
       body: JSON.stringify({
         name: name,
         link: link
       })
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    });
+    }); 
   }
 
   deleteCard(id) {
-    return fetch(`${this.baseUrl}/cards/${id}`, {
+    return this._makeRequest({
       method: 'DELETE',
-      headers: {
-        authorization: this.token,
-      }
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    });
+      path: `/cards/${id}`
+    });     
+  }
+
+
+  // лайки
+  
+  deleteLike(cardId) {
+    return this._makeRequest({
+      method: 'DELETE',
+      path: `/cards/likes/${cardId}`
+    });      
   }
 
   putLike(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return this._makeRequest({
       method: 'PUT',
-      headers: {
-        authorization: this.token,
-      }
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    });
-  }
-
-  deleteLike(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this.token,
-      }
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    });
-  }
-
-  patchUserAvatar(ava) {
-    return fetch(`${this.baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
-      headers: {
-        authorization: this.token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        avatar: ava
-      })
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-    });    
-  }
+      path: `/cards/likes/${cardId}`
+    });      
+  }  
+  
 }

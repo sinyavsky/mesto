@@ -181,7 +181,7 @@ popupWithAvatarForm.setEventListeners();
 
 // попап для подтверждения удаления карточки
 const popupWithConfirmForm = new PopupWithForm('.popup_type_confirm', () => {
-  const card = popupWithConfirmForm.getOptions().elementToDelete;  console.log('wtf');
+  const card = popupWithConfirmForm.getOptions().elementToDelete;
   api.deleteCard(card.getCardId())
     .catch(err => handleApiError(err));   
   card.removeCard();
